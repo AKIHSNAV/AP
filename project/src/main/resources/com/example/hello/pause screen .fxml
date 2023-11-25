@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.PauseScreen">
+   <children>
+      <ImageView fitHeight="420.0" fitWidth="610.0" opacity="0.77" pickOnBounds="true">
+         <image>
+            <Image url="@../../../images/background.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle height="166.0" layoutY="254.0" stroke="BLACK" strokeType="INSIDE" width="135.0" />
+      <Rectangle height="166.0" layoutX="229.0" layoutY="254.0" stroke="BLACK" strokeType="INSIDE" width="84.0" />
+      <Rectangle height="166.0" layoutX="411.0" layoutY="254.0" stroke="BLACK" strokeType="INSIDE" width="39.0" />
+      <Rectangle height="166.0" layoutX="536.0" layoutY="254.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+      <ImageView fitHeight="120.0" fitWidth="84.0" layoutX="78.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/stickherowobg.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a5a6a8" height="313.0" layoutX="82.0" layoutY="46.0" opacity="0.71" stroke="BLACK" strokeType="INSIDE" width="462.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="216.0" layoutY="233.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="180.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="280.0" layoutY="294.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="345.0" layoutY="294.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="215.0" layoutY="294.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+      <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="286.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/restartwobg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="326.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/play%20wobg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="351.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/home.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="221.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/save.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="278.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="17" textAlignment="CENTER" wrappingWidth="51.0">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Text>
+      <Text layoutX="216.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAUSED" textAlignment="CENTER">
+         <font>
+            <Font size="52.0" />
+         </font>
+      </Text>
+      <Text layoutX="224.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="resume" textAlignment="CENTER" wrappingWidth="124.9124755859375">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="217.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SCORE" textAlignment="CENTER" wrappingWidth="180.0">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="571.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/cherry%20wobg.png" />
+         </image>
+      </ImageView>
+      <Text fill="#0b0b0b" layoutX="570.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

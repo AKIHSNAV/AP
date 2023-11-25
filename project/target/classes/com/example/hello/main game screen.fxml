@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
+   <children>
+      <ImageView fitHeight="431.0" fitWidth="616.0" layoutY="1.0" opacity="0.77" pickOnBounds="true">
+         <image>
+            <Image url="@../../../images/background.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle height="198.0" layoutY="233.0" stroke="BLACK" strokeType="INSIDE" width="279.0" />
+      <ImageView fitHeight="120.0" fitWidth="84.0" layoutX="195.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/stickherowobg.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="95.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STICK HERO">
+         <font>
+            <Font name="Cambria" size="82.0" />
+         </font>
+      </Text>
+      <Circle fill="#ff1f1f" layoutX="381.0" layoutY="251.0" onMouseClicked="#handleSwitchToMainScreen" radius="59.0" stroke="RED" />
+      <Circle fill="#ff1f1f" layoutX="519.0" layoutY="249.0" radius="59.0" stroke="RED" />
+      <Text fill="WHITE" layoutX="468.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RESUME" wrappingWidth="127.78826904296875">
+         <font>
+            <Font name="Cambria" size="28.0" />
+         </font>
+      </Text>
+      <Circle fill="#a5a6a8" layoutX="377.0" layoutY="349.0" opacity="0.37" radius="21.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#a5a6a8" layoutX="378.0" layoutY="402.0" opacity="0.38" radius="21.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#a5a6a8" layoutX="511.0" layoutY="399.0" opacity="0.38" radius="21.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#a5a6a8" layoutX="511.0" layoutY="345.0" opacity="0.38" radius="21.0" stroke="BLACK" strokeType="INSIDE" />
+      <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="361.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/stats.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="39.0" fitWidth="42.0" layoutX="492.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/cherry%20wobg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="33.0" layoutX="361.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/Questionmark.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="33.0" fitWidth="26.0" layoutX="498.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/speaker1.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="switchToMainScreenButton" layoutX="353.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleSwitchToMainScreen" onMouseClicked="#handleSwitchToMainScreen" text="PLAY" textFill="#190000">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
