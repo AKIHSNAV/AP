@@ -50,40 +50,57 @@ public class HelloController {
         stage.setScene(scene);
         stage.show();
     }
-
+    private Timeline growthTimeline;
+    private int scaleFactor = 4;
     public void growStick() {
         double scaleFactor = 4; // You can adjust the scale factor as needed
-        startTime = System.nanoTime();
 
-        // Check if the rectangle is not null
-        if (stick != null ) {
-            stick.setFill(Color.BROWN);
+        // Check if the timeline is not null and already running
+        if (growthTimeline == null || !growthTimeline.getStatus().equals(Timeline.Status.RUNNING)) {
+            growthTimeline = new Timeline(new KeyFrame(Duration.millis(16), event -> {
+                // Check if the rectangle is not null
+                if (stick != null) {
+                    stick.setFill(Color.BROWN);
 
-            // Adjust the y-coordinate to move the rectangle upwards
-            stick.setY(stick.getY() - scaleFactor);
+                    // Adjust the y-coordinate to move the rectangle upwards
+                    stick.setY(stick.getY() - scaleFactor);
 
-            // Increase the height of the rectangle
-            stick.setHeight(stick.getHeight() + scaleFactor);
+                    // Increase the height of the rectangle
+                    stick.setHeight(stick.getHeight() + scaleFactor);
+                }
+            }));
+            growthTimeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely until stopped
+            growthTimeline.play();
         }
     }
+
     private Timeline fallTimeline;
     public void lowerStick() {
-        if (stick != null) {
-            // Create a timeline for the rotation animation
-            fallTimeline = new Timeline(
-                    new KeyFrame(Duration.millis(16), event -> stick.setRotate(stick.getRotate() + 10))
-            );
-            fallTimeline.setCycleCount(9); // Rotate 90 degrees
-            // Play the timeline to make the stick fall
+        if (growthTimeline != null && growthTimeline.getStatus().equals(Timeline.Status.RUNNING)) {
+            growthTimeline.stop();
+
+            // Create a new timeline for lowering the stick
+            fallTimeline = new Timeline(new KeyFrame(Duration.millis(16), event -> {
+                // Check if the rectangle is not null
+                if (stick != null) {
+                    // Set the pivot point for rotation to be the bottom-center of the rectangle
+//                    stick.setTranslateX(stick.getWidth());
+                    stick.setTranslateX(70);
+                    System.out.println(stick.getHeight());
+                    System.out.println(stick.getWidth());
+                    stick.setTranslateY(stick.getHeight()/2.0);
+
+                    // Rotate the stick to 90 degrees around the bottom-center
+                    stick.setRotate(90);
+
+                    // You may also want to change the color or other properties as needed
+                }
+            }));
+            fallTimeline.setCycleCount(1); // Run only once
             fallTimeline.play();
-
-            stick.setY(10);
-
-            walk();
         }
-
-
     }
+    
     public void walk(){
 
     }
@@ -95,8 +112,6 @@ public class HelloController {
         startTime = System.nanoTime();
         flag = true;
     }
-
-
     public final void mouseReleased(final MouseEvent e) {
         if(flag) {
             endTime = System.nanoTime();
@@ -104,7 +119,4 @@ public class HelloController {
         }
         holdTime = (endTime - startTime) / Math.pow(10,9);
     }
-
-
-
 }
