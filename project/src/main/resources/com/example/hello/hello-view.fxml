@@ -1,76 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" layoutY="1.0" opacity="0.77" pickOnBounds="true">
+      <ImageView fitHeight="412.0" fitWidth="600.0" opacity="0.77" pickOnBounds="true">
          <image>
             <Image url="@../../../images/background.jpg" />
          </image>
       </ImageView>
-      <Text layoutX="114.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME OVER!">
+      <Rectangle height="166.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="135.0" />
+      <Rectangle height="166.0" layoutX="255.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="84.0" />
+      <Rectangle height="166.0" layoutX="411.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="39.0" />
+      <Rectangle height="166.0" layoutX="526.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#abb0b5" height="61.0" layoutX="233.0" layoutY="14.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" width="135.0" />
+      <Text layoutX="286.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
-            <Font size="67.0" />
+            <Font size="56.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="151.0" layoutX="143.0" layoutY="89.0" stroke="BLACK" strokeType="INSIDE" width="329.0" />
-      <Text layoutX="288.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SCORE" />
-      <Text layoutX="293.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BEST" />
-      <Text layoutX="294.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="24.796875">
-         <font>
-            <Font size="46.0" />
-         </font>
-      </Text>
-      <Text layoutX="293.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="24.796875">
-         <font>
-            <Font size="46.0" />
-         </font>
-      </Text>
-      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#fb2e2b" height="44.0" layoutX="216.0" layoutY="257.0" stroke="BLACK" strokeType="INSIDE" width="168.0" />
-      <Text fill="WHITE" layoutX="261.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SHARE">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Text>
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="162.0" layoutY="320.0" opacity="0.38" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="393.0" layoutY="319.0" opacity="0.38" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="318.0" layoutY="320.0" opacity="0.38" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="238.0" layoutY="320.0" opacity="0.38" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-      <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="399.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player1" fitHeight="120.0" fitWidth="84.0" layoutX="68.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/restartwobg.png" />
+            <Image url="@../../../images/stickherowobg.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="168.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="37.0" fitWidth="53.0" layoutX="6.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/home.png" />
+            <Image url="@../../../images/pausewobg.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="245.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/save.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="324.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/stats.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="564.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="561.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/cherry%20wobg.png" />
          </image>
       </ImageView>
-      <Text fill="#0b0b0b" layoutX="563.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
+      <Text fill="#0b0b0b" layoutX="560.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="397.0" layoutX="205.0" layoutY="8.0" onMousePressed="#growStick" onMouseReleased="#lowerStick" onSwipeDown="#lowerStick" onTouchPressed="#growStick" onTouchReleased="#lowerStick" stroke="TRANSPARENT" strokeType="INSIDE" width="393.0" />
+      <Rectangle fx:id="stick" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="19.0" layoutX="125.0" layoutY="220.0" stroke="TRANSPARENT" strokeType="INSIDE" width="10.0" />
    </children>
 </AnchorPane>
