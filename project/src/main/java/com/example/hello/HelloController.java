@@ -2,6 +2,9 @@ package com.example.hello;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +30,9 @@ public class HelloController {
 
     @FXML
     private Rectangle stick;
+    @FXML
+    private ImageView player1;
+    private Image player2;
 
     public HelloController() throws IOException {
     }
@@ -75,12 +81,11 @@ public class HelloController {
     }
 
     private Timeline fallTimeline;
-    public void lowerStick() {
+    public void lowerStick() throws InterruptedException {
         if (growthTimeline != null && growthTimeline.getStatus().equals(Timeline.Status.RUNNING)) {
             growthTimeline.stop();
 
             // Create a new timeline for lowering the stick
-            fallTimeline = new Timeline(new KeyFrame(Duration.millis(16), event -> {
                 // Check if the rectangle is not null
                 if (stick != null) {
                     // Set the pivot point for rotation to be the bottom-center of the rectangle
@@ -91,20 +96,76 @@ public class HelloController {
                     stick.setTranslateY(stick.getHeight()/2.0);
                     stick.setTranslateX(stick.getHeight()/2.0);
 
+
                     // Rotate the stick to 90 degrees around the bottom-center
-                    stick.setRotate(90);
+//                    stick.setRotate(10);
 
                     // You may also want to change the color or other properties as needed
                 }
-            }));
-            fallTimeline.setCycleCount(1); // Run only once
+            fallTimeline = new Timeline(
+                    new KeyFrame(Duration.millis(16), event -> stick.setRotate(stick.getRotate() + 10))
+            );
+            fallTimeline.setCycleCount(9);
             fallTimeline.play();
         }
+        //wait();
+        walk(stick.getHeight());
     }
 
-    public void walk(){
+//    public void walk(double distance) {
+//        Timeline timeline = new Timeline();
+//        double speed = 3.0; // Adjust the speed as needed
+//        double distance_walked =0.0;
+//
+//        // Calculate the duration based on distance and speed
+////        double durationMillis = distance / speed;
+//
+//        // Create a key frame for the animation
+//        KeyFrame keyFrame = new KeyFrame(Duration.millis(10), (ActionEvent event) -> {
+//            // Set the player's final position
+//            while (distance_walked < distance){
+//                player1.setX(player1.getX() + speed);
+//                distance_walked += speed;
+//            }
+//        });
+//        timeline.stop(); // Stop the animation
+//        // Add the key frame to the timeline
+//        timeline.getKeyFrames().add(keyFrame);
+//
+//        // Play the timeline
+//        timeline.play();
+//    }
+    public void walk(double distance) {
+        Timeline timeline = new Timeline();
+        double speed = 3.0; // Adjust the speed as needed
+        double[] distance_walked = {0.0};
 
+        // Calculate the duration based on distance and speed
+        double durationMillis = distance / speed;
+
+        // Create a key frame for the animation
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
+            if (distance_walked[0] < distance) {
+                player1.setX(player1.getX() + speed);
+                distance_walked[0] += speed;
+            } else {
+                timeline.stop(); // Stop the animation when the desired distance is reached
+            }
+        });
+
+        // Add the key frame to the timeline
+        timeline.getKeyFrames().add(keyFrame);
+
+        // Set the cycle count to INDEFINITE for smooth animation
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
+        // Set the duration of the timeline
+        timeline.setDelay(Duration.millis(durationMillis));
+
+        // Play the timeline
+        timeline.play();
     }
+
 
     double startTime, endTime, holdTime;
     boolean flag = false;
