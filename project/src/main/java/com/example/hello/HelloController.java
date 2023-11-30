@@ -85,10 +85,11 @@ public class HelloController {
                 if (stick != null) {
                     // Set the pivot point for rotation to be the bottom-center of the rectangle
 //                    stick.setTranslateX(stick.getWidth());
-                    stick.setTranslateX(70);
+
                     System.out.println(stick.getHeight());
                     System.out.println(stick.getWidth());
                     stick.setTranslateY(stick.getHeight()/2.0);
+                    stick.setTranslateX(stick.getHeight()/2.0);
 
                     // Rotate the stick to 90 degrees around the bottom-center
                     stick.setRotate(90);
@@ -100,7 +101,7 @@ public class HelloController {
             fallTimeline.play();
         }
     }
-    
+
     public void walk(){
 
     }
