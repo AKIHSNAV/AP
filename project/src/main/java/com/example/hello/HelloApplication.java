@@ -19,12 +19,6 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-//    public void switchToAnotherScene(Stage gamescreen) throws IOException {
-//        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("main screen.fxml"));
-//        Scene anotherScene = new Scene(loader.load(), 600, 400);
-//        gamescreen.setScene(anotherScene);
-//        gamescreen.show();
-//    }
 
     public static void main(String[] args) {
         launch();

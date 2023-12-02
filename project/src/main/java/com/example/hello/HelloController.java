@@ -102,10 +102,13 @@ public class HelloController {
 
                     // You may also want to change the color or other properties as needed
                 }
+//            fallTimeline = new Timeline(
+//                    new KeyFrame(Duration.millis(16), event -> stick.setRotate(stick.getRotate() + 10))
+//            );
             fallTimeline = new Timeline(
-                    new KeyFrame(Duration.millis(16), event -> stick.setRotate(stick.getRotate() + 10))
+                    new KeyFrame(Duration.millis(16), event -> stick.setRotate(90))
             );
-            fallTimeline.setCycleCount(9);
+            fallTimeline.setCycleCount(1);
             fallTimeline.play();
         }
         //wait();
