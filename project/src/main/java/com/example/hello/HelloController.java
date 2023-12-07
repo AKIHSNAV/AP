@@ -5,6 +5,8 @@ import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +26,8 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class HelloController {
+    public ImageView background;
+    public Rectangle nextpillar;
     private Stage stage;
     private Scene scene;
     private AnchorPane root ;
@@ -47,7 +51,6 @@ public class HelloController {
             // Handle the exception appropriately
             return;  // Exit the method to prevent further execution
         }
-
         // Now, root is properly initialized
         System.out.println("Root is null: " + (root == null));  // prints false
 
@@ -89,22 +92,11 @@ public class HelloController {
                 // Check if the rectangle is not null
                 if (stick != null) {
                     // Set the pivot point for rotation to be the bottom-center of the rectangle
-//                    stick.setTranslateX(stick.getWidth());
-
                     System.out.println(stick.getHeight());
                     System.out.println(stick.getWidth());
                     stick.setTranslateY(stick.getHeight()/2.0);
                     stick.setTranslateX(stick.getHeight()/2.0);
-
-
-                    // Rotate the stick to 90 degrees around the bottom-center
-//                    stick.setRotate(10);
-
-                    // You may also want to change the color or other properties as needed
                 }
-//            fallTimeline = new Timeline(
-//                    new KeyFrame(Duration.millis(16), event -> stick.setRotate(stick.getRotate() + 10))
-//            );
             fallTimeline = new Timeline(
                     new KeyFrame(Duration.millis(16), event -> stick.setRotate(90))
             );
@@ -115,29 +107,6 @@ public class HelloController {
         walk(stick.getHeight());
     }
 
-//    public void walk(double distance) {
-//        Timeline timeline = new Timeline();
-//        double speed = 3.0; // Adjust the speed as needed
-//        double distance_walked =0.0;
-//
-//        // Calculate the duration based on distance and speed
-////        double durationMillis = distance / speed;
-//
-//        // Create a key frame for the animation
-//        KeyFrame keyFrame = new KeyFrame(Duration.millis(10), (ActionEvent event) -> {
-//            // Set the player's final position
-//            while (distance_walked < distance){
-//                player1.setX(player1.getX() + speed);
-//                distance_walked += speed;
-//            }
-//        });
-//        timeline.stop(); // Stop the animation
-//        // Add the key frame to the timeline
-//        timeline.getKeyFrames().add(keyFrame);
-//
-//        // Play the timeline
-//        timeline.play();
-//    }
     public void walk(double distance) {
         Timeline timeline = new Timeline();
         double speed = 3.0; // Adjust the speed as needed
@@ -145,6 +114,7 @@ public class HelloController {
 
         // Calculate the duration based on distance and speed
         double durationMillis = distance / speed;
+        flag = true;
 
         // Create a key frame for the animation
         KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
@@ -152,14 +122,24 @@ public class HelloController {
                 player1.setX(player1.getX() + speed);
                 distance_walked[0] += speed;
             } else {
-                timeline.stop(); // Stop the animation when the desired distance is reached
+                // If the walking distance is covered, initiate fall
+                fall();
+                timeline.stop();
             }
         });
-
-        // Add the key frame to the timeline
         timeline.getKeyFrames().add(keyFrame);
 
-        // Set the cycle count to INDEFINITE for smooth animation
+        EventHandler<ActionEvent> onFinished = (ActionEvent event) -> {
+            // Check if the stick bounds intersect with the next pillar bounds
+            if (!stick.getBoundsInParent().intersects(nextpillar.getBoundsInParent())) {
+                // Stick does not intersect with the next pillar, initiate fall
+                fall();
+            }
+        };
+        // Set the event handler for when the timeline finishes
+        timeline.setOnFinished(onFinished);
+
+        // Set the cycle count to 1 since we want to play it only once
         timeline.setCycleCount(Timeline.INDEFINITE);
 
         // Set the duration of the timeline
@@ -169,6 +149,27 @@ public class HelloController {
         timeline.play();
     }
 
+
+    private void fall() {
+        Timeline fallAnimation = new Timeline();
+
+        fallAnimation.getKeyFrames().add(
+                new KeyFrame(Duration.millis(16), event -> {
+                    player1.setRotate(player1.getRotate() + 50);
+                    player1.setY(player1.getY() + 5);
+
+                    // Check if the player has reached the bottom of the background
+                    if (player1.getY() >= background.getFitHeight()) {
+                        fallAnimation.stop();
+                    }
+                })
+        );
+
+        fallAnimation.setCycleCount(Timeline.INDEFINITE);
+        fallAnimation.play();
+    }
+
+    
 
     double startTime, endTime, holdTime;
     boolean flag = false;
