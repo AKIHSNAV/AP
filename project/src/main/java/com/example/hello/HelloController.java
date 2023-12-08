@@ -37,6 +37,8 @@ public class HelloController {
     @FXML
     private Rectangle curpillar;
 
+    private Rectangle newpillar;
+
     @FXML
     private Rectangle stick;
     @FXML
@@ -95,14 +97,14 @@ public class HelloController {
             growthTimeline.stop();
 
             // Create a new timeline for lowering the stick
-                // Check if the rectangle is not null
-                if (stick != null) {
-                    // Set the pivot point for rotation to be the bottom-center of the rectangle
-                    System.out.println(stick.getHeight());
-                    System.out.println(stick.getWidth());
-                    stick.setTranslateY(stick.getHeight()/2.0);
-                    stick.setTranslateX(stick.getHeight()/2.0);
-                }
+            // Check if the rectangle is not null
+            if (stick != null) {
+                // Set the pivot point for rotation to be the bottom-center of the rectangle
+                System.out.println(stick.getHeight());
+                System.out.println(stick.getWidth());
+                stick.setTranslateY(stick.getHeight()/2.0);
+                stick.setTranslateX(stick.getHeight()/2.0);
+            }
             fallTimeline = new Timeline(
                     new KeyFrame(Duration.millis(16), event -> stick.setRotate(90))
             );
@@ -194,6 +196,8 @@ public class HelloController {
     }
 
     private void shiftPillar(){
+        newpillar = Pillar1.generatePillar((int)(nextpillar.getLayoutX() + nextpillar.getWidth())).getPillar();
+        root.getChildren().add(newpillar);
         Timeline timeline = new Timeline();
 
         KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {

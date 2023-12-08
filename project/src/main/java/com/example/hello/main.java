@@ -1,7 +1,9 @@
 package com.example.hello;
+import javafx.scene.shape.Rectangle;
+
 import java.util.Random;
 
-class Pillar {
+class Pillar extends Rectangle {
     private final int height;
     private final int width;
 
@@ -14,14 +16,17 @@ class Pillar {
         Random random = new Random();
         return random.nextInt(maxWidth - minWidth + 1) + minWidth;
     }
-
-    public int getHeight() {
-        return height;
+    public static Pillar generatePillar(){
+        Pillar newpillar = new Pillar(200, 200, 200);
+        System.out.println("generating");
+        //int distance = generateRandomDistance();
+        return newpillar;
+    }
+    public void shiftPillar(){
+        System.out.println("shifting");
     }
 
-    public int getWidth() {
-        return width;
-    }
+
 }
 
 interface Character {
