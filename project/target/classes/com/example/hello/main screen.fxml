@@ -15,9 +15,7 @@
          </image>
       </ImageView>
       <Rectangle height="166.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="135.0" />
-      <Rectangle fx:id="nextpillar" height="166.0" layoutX="255.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="84.0" />
-      <Rectangle height="166.0" layoutX="411.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="39.0" />
-      <Rectangle height="166.0" layoutX="526.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+      <Rectangle fx:id="nextpillar" height="166.0" layoutX="346.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="152.0" />
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#abb0b5" height="61.0" layoutX="233.0" layoutY="14.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" width="135.0" />
       <Text layoutX="286.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>

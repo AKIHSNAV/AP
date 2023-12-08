@@ -24,20 +24,23 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class HelloController {
     public ImageView background;
-    public Rectangle nextpillar;
+
     private Stage stage;
     private Scene scene;
     private AnchorPane root ;
+    @FXML
+    private Rectangle nextpillar;
 
     @FXML
     private Rectangle stick;
     @FXML
     private ImageView player1;
     private Image player2;
-
+    int count = 0;
     public HelloController() throws IOException {
     }
 
@@ -115,26 +118,29 @@ public class HelloController {
         // Calculate the duration based on distance and speed
         double durationMillis = distance / speed;
         flag = true;
+        count++;
 
         // Create a key frame for the animation
         KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
+            System.out.println(Arrays.toString(distance_walked));
             if (distance_walked[0] < distance) {
                 player1.setX(player1.getX() + speed);
                 distance_walked[0] += speed;
+
+                System.out.println("in if "+ count);
             } else {
+                System.out.println("in else "+ count);
+                if (!stick.getBoundsInParent().intersects(nextpillar.getBoundsInParent())){
+                    fall();
+                }
                 // If the walking distance is covered, initiate fall
-                fall();
+//                fall();
                 timeline.stop();
             }
         });
         timeline.getKeyFrames().add(keyFrame);
-
         EventHandler<ActionEvent> onFinished = (ActionEvent event) -> {
-            // Check if the stick bounds intersect with the next pillar bounds
-            if (!stick.getBoundsInParent().intersects(nextpillar.getBoundsInParent())) {
-                // Stick does not intersect with the next pillar, initiate fall
-                fall();
-            }
+
         };
         // Set the event handler for when the timeline finishes
         timeline.setOnFinished(onFinished);
@@ -149,27 +155,21 @@ public class HelloController {
         timeline.play();
     }
 
-
     private void fall() {
         Timeline fallAnimation = new Timeline();
-
         fallAnimation.getKeyFrames().add(
                 new KeyFrame(Duration.millis(16), event -> {
-                    player1.setRotate(player1.getRotate() + 50);
+                    player1.setRotate(player1.getRotate() + 20);
                     player1.setY(player1.getY() + 5);
-
-                    // Check if the player has reached the bottom of the background
                     if (player1.getY() >= background.getFitHeight()) {
                         fallAnimation.stop();
                     }
                 })
         );
-
         fallAnimation.setCycleCount(Timeline.INDEFINITE);
         fallAnimation.play();
     }
 
-    
 
     double startTime, endTime, holdTime;
     boolean flag = false;
