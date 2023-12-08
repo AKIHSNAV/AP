@@ -34,13 +34,15 @@ public class HelloController {
     private AnchorPane root ;
     @FXML
     private Rectangle nextpillar;
+    @FXML
+    private Rectangle curpillar;
 
     @FXML
     private Rectangle stick;
     @FXML
     private ImageView player1;
     private Image player2;
-    int count = 0;
+    private boolean isFlag = true;
     public HelloController() throws IOException {
     }
 
@@ -84,6 +86,7 @@ public class HelloController {
             growthTimeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely until stopped
             growthTimeline.play();
         }
+
     }
 
     private Timeline fallTimeline;
@@ -107,7 +110,17 @@ public class HelloController {
             fallTimeline.play();
         }
         //wait();
-        walk(stick.getHeight());
+        System.out.println("-----------------------");
+        System.out.println(stick.getHeight());
+        System.out.println(nextpillar.getLayoutX());
+        System.out.println(curpillar.getWidth());
+        System.out.println(curpillar.getLayoutX());
+        if ( stick.getHeight() < (nextpillar.getLayoutX() - curpillar.getWidth())  ){
+            System.out.println("stick is short");
+            isFlag = false;
+            walk(stick.getHeight());
+        }
+        walk(nextpillar.getLayoutX() - curpillar.getWidth() + nextpillar.getWidth() );
     }
 
     public void walk(double distance) {
@@ -117,8 +130,8 @@ public class HelloController {
 
         // Calculate the duration based on distance and speed
         double durationMillis = distance / speed;
-        flag = true;
-        count++;
+
+
 
         // Create a key frame for the animation
         KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
@@ -127,14 +140,14 @@ public class HelloController {
                 player1.setX(player1.getX() + speed);
                 distance_walked[0] += speed;
 
-                System.out.println("in if "+ count);
+                //System.out.println("in if "+ count);
             } else {
-                System.out.println("in else "+ count);
-                if (!stick.getBoundsInParent().intersects(nextpillar.getBoundsInParent())){
+                //System.out.println("in else "+ count);
+
+                if (!isFlag){
                     fall();
                 }
-                // If the walking distance is covered, initiate fall
-//                fall();
+
                 timeline.stop();
             }
         });
@@ -153,6 +166,10 @@ public class HelloController {
 
         // Play the timeline
         timeline.play();
+
+        if (isFlag){
+            shiftPillar();
+        }
     }
 
     private void fall() {
@@ -170,6 +187,9 @@ public class HelloController {
         fallAnimation.play();
     }
 
+    private void shiftPillar(){
+
+    }
 
     double startTime, endTime, holdTime;
     boolean flag = false;
