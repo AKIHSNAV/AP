@@ -31,6 +31,7 @@ public class HelloController {
 
     private Stage stage;
     private Scene scene;
+    @FXML
     private AnchorPane root ;
     @FXML
     private Rectangle nextpillar;
@@ -44,6 +45,8 @@ public class HelloController {
     @FXML
     private ImageView player1;
     private Image player2;
+
+    private Boolean walking = false;
     private boolean isFlag = true;
     public HelloController() throws IOException {
     }
@@ -126,30 +129,30 @@ public class HelloController {
     }
 
     public void walk(double distance) {
+        walking = true;
         Timeline timeline = new Timeline();
         double speed = 3.0; // Adjust the speed as needed
         double[] distance_walked = {0.0};
 
         // Calculate the duration based on distance and speed
         double durationMillis = distance / speed;
-
-
-
         // Create a key frame for the animation
         KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
             System.out.println(Arrays.toString(distance_walked));
             if (distance_walked[0] < distance) {
                 player1.setX(player1.getX() + speed);
                 distance_walked[0] += speed;
-
                 //System.out.println("in if "+ count);
             } else {
                 //System.out.println("in else "+ count);
-
                 if (!isFlag){
                     fall();
                 }
-
+                if(isFlag){
+                    System.out.println("??????");
+                    shiftPillar();
+//                    nextpillar = newpillar;
+                }
                 timeline.stop();
             }
         });
@@ -173,9 +176,10 @@ public class HelloController {
 //            shiftPillar();
 //        }
         timeline.setOnFinished(event -> {
-            if (isFlag) {
-                shiftPillar();
-            }
+//            if (isFlag) {
+//                shiftPillar();
+//                nextpillar = newpillar;
+//            }
         });
 
     }
@@ -197,13 +201,20 @@ public class HelloController {
 
     private void shiftPillar(){
         newpillar = Pillar1.generatePillar((int)(nextpillar.getLayoutX() + nextpillar.getWidth())).getPillar();
+        System.out.println("Root is null: " + (root == null)); //prints true
         root.getChildren().add(newpillar);
+
+        newpillar.toFront();
+
         Timeline timeline = new Timeline();
 
         KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
 
-            if (nextpillar.getLayoutX() !=0) {
-                nextpillar.setLayoutX(nextpillar.getLayoutX() - 20);
+            if (curpillar.getWidth() < nextpillar.getLayoutX() + nextpillar.getWidth()) {
+                nextpillar.setLayoutX(nextpillar.getLayoutX() - 2);
+                newpillar.setLayoutX(newpillar.getLayoutX() - 2);
+                player1.setLayoutX(player1.getLayoutX() - 2);
+
             }
         });
         timeline.getKeyFrames().add(keyFrame);
@@ -221,6 +232,8 @@ public class HelloController {
 
         // Play the timeline
         timeline.play();
+
+
 
     }
 

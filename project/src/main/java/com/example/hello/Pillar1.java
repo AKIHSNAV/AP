@@ -1,8 +1,10 @@
 package com.example.hello;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.Random;
+
 
 public class Pillar1 extends Rectangle {
     private final int height= 166;
@@ -11,16 +13,18 @@ public class Pillar1 extends Rectangle {
     private static int minWidth = 15;
     private static int maxWidth = 100;
     private static int minDistance = 30;
-    private static int maxDistance = 200;
+    private static int maxDistance = 100;
 
     Rectangle pillar;
 
     public Pillar1(int layoutx) {
+        this.pillar = new Rectangle();
         this.width = generateRandomWidth();
         pillar.setWidth(this.width);
         pillar.setHeight(this.height);
         pillar.setLayoutX(layoutx);
         pillar.setLayoutY(244);
+        pillar.setFill(Color.BLACK);
 
     }
 
