@@ -167,9 +167,15 @@ public class HelloController {
         // Play the timeline
         timeline.play();
 
-        if (isFlag){
-            shiftPillar();
-        }
+//        if (isFlag){
+//            shiftPillar();
+//        }
+        timeline.setOnFinished(event -> {
+            if (isFlag) {
+                shiftPillar();
+            }
+        });
+
     }
 
     private void fall() {
@@ -188,21 +194,32 @@ public class HelloController {
     }
 
     private void shiftPillar(){
+        Timeline timeline = new Timeline();
+
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
+
+            if (nextpillar.getLayoutX() !=0) {
+                nextpillar.setLayoutX(nextpillar.getLayoutX() - 20);
+            }
+        });
+        timeline.getKeyFrames().add(keyFrame);
+        EventHandler<ActionEvent> onFinished = (ActionEvent event) -> {
+
+        };
+        // Set the event handler for when the timeline finishes
+        timeline.setOnFinished(onFinished);
+
+        // Set the cycle count to 1 since we want to play it only once
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
+        // Set the duration of the timeline
+        timeline.setDelay(Duration.millis(500));
+
+        // Play the timeline
+        timeline.play();
 
     }
 
-    double startTime, endTime, holdTime;
-    boolean flag = false;
 
-    public final void mousePressed(final MouseEvent e) {
-        startTime = System.nanoTime();
-        flag = true;
-    }
-    public final void mouseReleased(final MouseEvent e) {
-        if(flag) {
-            endTime = System.nanoTime();
-            flag = false;
-        }
-        holdTime = (endTime - startTime) / Math.pow(10,9);
-    }
+
 }
