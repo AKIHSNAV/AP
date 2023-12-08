@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
    <children>
       <ImageView fx:id="background" fitHeight="412.0" fitWidth="626.0" layoutX="-19.0" layoutY="-4.0" opacity="0.77" pickOnBounds="true">
          <image>
@@ -43,7 +40,7 @@
             <Image url="@../../../images/home.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="RED" height="83.0" layoutX="257.0" layoutY="209.0" opacity="0.66" stroke="BLACK" strokeType="INSIDE" width="114.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="RED" height="83.0" layoutX="257.0" layoutY="209.0" onMouseClicked="#revive" opacity="0.66" stroke="BLACK" strokeType="INSIDE" width="114.0" />
       <Text fill="WHITE" layoutX="261.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REVIVE" textAlignment="CENTER" wrappingWidth="105.33332824707031">
          <font>
             <Font name="System Bold" size="25.0" />

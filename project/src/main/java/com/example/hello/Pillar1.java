@@ -10,8 +10,8 @@ public class Pillar1 extends Rectangle {
     private final int height= 166;
     private final int width;
 
-    private static int minWidth = 3;
-    private static int maxWidth = 10;
+    private static int minWidth = 4;
+    private static int maxWidth = 36;
     private static int minDistance = 30;
     private static int maxDistance = 100;
 

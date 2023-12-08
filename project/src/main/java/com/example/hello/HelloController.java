@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class HelloController {
     public ImageView background;
 
-
+    private Rectangle gameover;
     private Stage stage;
     private Scene scene;
     @FXML
@@ -131,13 +131,24 @@ public class HelloController {
         currentStage.show();
     }
     public void SwitchToGameOverScreen() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("game over.fxml"));
-        AnchorPane newScreenRoot = loader.load();
-        Stage currentStage = (Stage)(root.getScene().getWindow());
-        Scene newScreenScene = new Scene(newScreenRoot);
-        currentStage.setScene(newScreenScene);
-        currentStage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("gameover.fxml"));
+            AnchorPane newScreenRoot = loader.load();
+            Stage currentStage = (Stage)(root.getScene().getWindow());
+            Scene newScreenScene = new Scene(newScreenRoot);
+            currentStage.setScene(newScreenScene);
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Root is null: " + (root == null));
+            // Handle the exception appropriately
+            return;  // Exit the method to prevent further execution
+        }
+
+
     }
+
 
     private Timeline growthTimeline;
     private int scaleFactor = 4;
@@ -201,7 +212,6 @@ public class HelloController {
     }
 
     private void fall() {
-        System.out.println("starting fall player one is null" + (player1 == null));
         Timeline fallAnimation = new Timeline();
         fallAnimation.getKeyFrames().add(
                 new KeyFrame(Duration.millis(16), event -> {
@@ -219,7 +229,7 @@ public class HelloController {
         );
         fallAnimation.setCycleCount(Timeline.INDEFINITE);
         fallAnimation.play();
-        System.out.println("ending fall player one is null" + (player1 == null));
+
     }
 
     public void walk(double distance) {
@@ -247,6 +257,10 @@ public class HelloController {
                     cherrycount++;
                     ischerry = false;
                     cherryscore.setText(Integer.toString(cherrycount));
+                }
+                if (player1.getScaleY() == -1 && distance_walked[0] + curpillar.getWidth() >= nextpillar.getLayoutX() ){
+                    fall();
+                    timeline.stop();
                 }
             } else {
                 timeline.stop();
@@ -329,6 +343,17 @@ public class HelloController {
             ischerry = true;
         } else {
             ischerry = false;
+        }
+    }
+
+    public void revive() throws InterruptedException{
+        System.out.println("in revive");
+        if (cherrycount >= 1){
+            player1.setLayoutY(244);
+            player1.setLayoutX(nextpillar.getLayoutX() - curpillar.getWidth() + nextpillar.getWidth());
+            player1.setScaleX(1);
+        } else {
+            gameover.setOpacity(1);
         }
     }
 
