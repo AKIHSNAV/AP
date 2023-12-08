@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
    <children>
-      <ImageView fx:id="background" fitHeight="412.0" fitWidth="600.0" onKeyPressed="#FlipHero" opacity="0.77" pickOnBounds="true">
+      <ImageView fx:id="background" fitHeight="412.0" fitWidth="600.0" opacity="0.77" pickOnBounds="true">
          <image>
             <Image url="@../../../images/background.jpg" />
          </image>
@@ -25,14 +27,14 @@
             <Image url="@../../../images/stickherowobg.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="37.0" fitWidth="53.0" layoutX="6.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="37.0" fitWidth="53.0" layoutX="6.0" layoutY="10.0" onMouseClicked="#SwitchToPauseScreen" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/pausewobg.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="561.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="scorecherry" fitHeight="37.0" fitWidth="37.0" layoutX="561.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/cherry%20wobg.png" />
+            <Image url="@../../../images/scorecherry.png" />
          </image>
       </ImageView>
       <Text fill="#0b0b0b" layoutX="560.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
@@ -41,6 +43,11 @@
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="397.0" layoutX="205.0" layoutY="8.0" onMousePressed="#growStick" onMouseReleased="#lowerStick" onTouchPressed="#growStick" onTouchReleased="#lowerStick" stroke="TRANSPARENT" strokeType="INSIDE" width="393.0" />
-      <Rectangle fx:id="stick" fill="#1f93ff00" height="19.0" layoutX="130.0" layoutY="225.0" stroke="TRANSPARENT" strokeType="INSIDE" width="5.0" />
+      <Rectangle fx:id="stick" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="19.0" layoutX="130.0" layoutY="220.0" stroke="TRANSPARENT" strokeType="INSIDE" width="5.0" />
+      <ImageView fx:id="cherry" fitHeight="52.0" fitWidth="46.0" layoutX="210.0" layoutY="239.0" opacity="0.18" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/scorecherry.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -21,6 +21,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class HelloController {
@@ -46,6 +47,18 @@ public class HelloController {
     private Boolean walking = false;
     private boolean isFlag = true;
     private boolean isFlipped = false;
+    @FXML
+    private ImageView cherry;
+    private boolean ischerry=false;
+    public int getCherrycount() {
+        return cherrycount;
+    }
+
+    public void setCherrycount(int cherrycount) {
+        this.cherrycount = cherrycount;
+    }
+
+    private int cherrycount=0;
     public HelloController() throws IOException {
     }
 
@@ -114,6 +127,26 @@ public class HelloController {
             }
         });
     }
+
+    public void SwitchToPauseScreen(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("pause screen.fxml"));
+        AnchorPane newScreenRoot = loader.load();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene newScreenScene = new Scene(newScreenRoot);
+        scene = new Scene(newScreenRoot);
+        // Set the new scene to the current stage
+        currentStage.setScene(newScreenScene);
+        currentStage.show();
+    }
+    public void SwitchToGameOverScreen() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("game over.fxml"));
+        AnchorPane newScreenRoot = loader.load();
+        Stage currentStage = (Stage)(root.getScene().getWindow());
+        Scene newScreenScene = new Scene(newScreenRoot);
+        currentStage.setScene(newScreenScene);
+        currentStage.show();
+    }
+
     private Timeline growthTimeline;
     private int scaleFactor = 4;
     public void growStick() {
@@ -184,6 +217,11 @@ public class HelloController {
                     player1.setY(player1.getY() + 5);
                     if (player1.getY() >= background.getFitHeight()) {
                         fallAnimation.stop();
+                        try {
+                            SwitchToGameOverScreen();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 })
         );
@@ -261,6 +299,7 @@ public class HelloController {
                 stick = Stick.reset().getStick();
                 root.getChildren().add(stick);
                 nextpillar = newpillar;
+                generatecherry();
             }
         });
         timeline.getKeyFrames().add(keyFrame);
@@ -278,7 +317,22 @@ public class HelloController {
         timeline.play();
         System.out.println("ending shifting pillar player one is null" + (player1 == null));
     }
-
+    private void generatecherry() {
+        Random random = new Random();
+        if ( random.nextInt(2) == 1 &&(nextpillar.getLayoutX() - curpillar.getWidth() > 50)){
+            System.out.println("next pillar x=" + nextpillar.getLayoutX());
+            System.out.println("curr pillar width=" +curpillar.getWidth());
+            int tmp = (int) random.nextInt((int) (nextpillar.getLayoutX() - curpillar.getWidth() - 45));
+            //System.out.println(tmp);
+            int position = tmp + 8 + (int) curpillar.getWidth();
+            //System.out.println(position);
+            cherry.setLayoutX(position);
+            cherry.setOpacity(1);
+            ischerry = true;
+        } else {
+            ischerry = false;
+        }
+    }
 
 
 }
