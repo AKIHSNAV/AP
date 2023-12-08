@@ -10,8 +10,8 @@ public class Pillar1 extends Rectangle {
     private final int height= 166;
     private final int width;
 
-    private static int minWidth = 15;
-    private static int maxWidth = 100;
+    private static int minWidth = 3;
+    private static int maxWidth = 10;
     private static int minDistance = 30;
     private static int maxDistance = 100;
 
@@ -30,7 +30,7 @@ public class Pillar1 extends Rectangle {
 
     private int generateRandomWidth() {
         Random random = new Random();
-        return random.nextInt(maxWidth + 1) + minWidth;
+        return (random.nextInt(maxWidth + 1) + minWidth)*5;
     }
     private static int generateRandomDistance() {
         Random random = new Random();
