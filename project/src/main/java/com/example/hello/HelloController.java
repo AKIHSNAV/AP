@@ -1,7 +1,9 @@
 package com.example.hello;
 
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,7 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import javafx.animation.SequentialTransition;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -204,51 +206,44 @@ public class HelloController {
     }
 
     private void shiftPillar() throws InterruptedException {
-        newpillar = Pillar1.generatePillar((int)(nextpillar.getLayoutX() + nextpillar.getWidth())).getPillar();
-        System.out.println("Root is null: " + (root == null)); //prints true
+        newpillar = Pillar1.generatePillar((int) (nextpillar.getLayoutX() + nextpillar.getWidth())).getPillar();
+        System.out.println("Root is null: " + (root == null)); // prints true
         root.getChildren().remove(stick);
         root.getChildren().add(newpillar);
 
         newpillar.toFront();
 
-        Thread child = new Thread(() -> {
-            System.out.println("i am the child i'm starting");
-            Timeline timeline = new Timeline();
+        System.out.println("i am the child i'm starting");
 
-            KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
+        // Create a SequentialTransition
+        SequentialTransition sequentialTransition = new SequentialTransition();
 
-                if (curpillar.getWidth() < nextpillar.getLayoutX() + nextpillar.getWidth()) {
-                    nextpillar.setLayoutX(nextpillar.getLayoutX() - 2);
-                    newpillar.setLayoutX(newpillar.getLayoutX() - 2);
-                    player1.setLayoutX(player1.getLayoutX() - 2);
+        // Create a TranslateTransition for shifting the pillars
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), nextpillar);
+        translateTransition.setToX(nextpillar.getLayoutX() - 2);
+        sequentialTransition.getChildren().add(translateTransition);
 
-                }
-            });
-            timeline.getKeyFrames().add(keyFrame);
-            EventHandler<ActionEvent> onFinished = (ActionEvent event) -> {
+        // Create a TranslateTransition for shifting the new pillar
+        TranslateTransition newPillarTransition = new TranslateTransition(Duration.millis(500), newpillar);
+        newPillarTransition.setToX(newpillar.getLayoutX() - 2);
+        sequentialTransition.getChildren().add(newPillarTransition);
 
-            };
-            // Set the event handler for when the timeline finishes
-            timeline.setOnFinished(onFinished);
+        // Create a TranslateTransition for shifting the player
+        TranslateTransition playerTransition = new TranslateTransition(Duration.millis(500), player1);
+        playerTransition.setToX(player1.getLayoutX() - 2);
+        sequentialTransition.getChildren().add(playerTransition);
 
-            // Set the cycle count to 1 since we want to play it only once
-            timeline.setCycleCount(Timeline.INDEFINITE);
-
-            // Set the duration of the timeline
-            timeline.setDelay(Duration.millis(500));
-
-            // Play the timeline
-            timeline.play();
-            //timeline.stop();
-            System.out.println(" i am the child, i'm done");
+        // Set the event handler for when the transition finishes
+        sequentialTransition.setOnFinished(event -> {
+            // Perform action when the transition finishes
+            stick = Stick.reset().getStick();
+            root.getChildren().add(stick);
         });
-        child.start();
-        child.join();
-        System.out.println("I waited for my child he's here i will run now");
-        stick = Stick.reset().getStick();
-        root.getChildren().add(stick);
 
+        // Play the sequential transition
+        sequentialTransition.play();
     }
+
 
 
 
