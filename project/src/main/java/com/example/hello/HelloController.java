@@ -1,32 +1,25 @@
 package com.example.hello;
 
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.animation.SequentialTransition;
+
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class HelloController {
     public ImageView background;
@@ -117,7 +110,7 @@ public class HelloController {
             fallTimeline.play();
         }
         //wait();
-        System.out.println("-----------------------");
+        System.out.println("----I will walk now---");
         System.out.println(stick.getHeight());
         System.out.println(nextpillar.getLayoutX());
         System.out.println(curpillar.getWidth());
@@ -130,65 +123,7 @@ public class HelloController {
         walk(nextpillar.getLayoutX() - curpillar.getWidth() + nextpillar.getWidth() );
     }
 
-    public void walk(double distance) {
-        walking = true;
-        Timeline timeline = new Timeline();
-        double speed = 3.0; // Adjust the speed as needed
-        double[] distance_walked = {0.0};
 
-        // Calculate the duration based on distance and speed
-        double durationMillis = distance / speed;
-        // Create a key frame for the animation
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
-            System.out.println(Arrays.toString(distance_walked));
-            if (distance_walked[0] < distance) {
-                player1.setX(player1.getX() + speed);
-                distance_walked[0] += speed;
-                //System.out.println("in if "+ count);
-            } else {
-                //System.out.println("in else "+ count);
-                if (!isFlag){
-                    fall();
-                }
-                if(isFlag){
-                    System.out.println("??????");
-                    try {
-                        shiftPillar();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-//                    nextpillar = newpillar;
-                }
-                timeline.stop();
-            }
-        });
-        timeline.getKeyFrames().add(keyFrame);
-        EventHandler<ActionEvent> onFinished = (ActionEvent event) -> {
-
-        };
-        // Set the event handler for when the timeline finishes
-        timeline.setOnFinished(onFinished);
-
-        // Set the cycle count to 1 since we want to play it only once
-        timeline.setCycleCount(Timeline.INDEFINITE);
-
-        // Set the duration of the timeline
-        timeline.setDelay(Duration.millis(durationMillis));
-
-        // Play the timeline
-        timeline.play();
-
-//        if (isFlag){
-//            shiftPillar();
-//        }
-        timeline.setOnFinished(event -> {
-//            if (isFlag) {
-//                shiftPillar();
-//                nextpillar = newpillar;
-//            }
-        });
-
-    }
 
     private void fall() {
         Timeline fallAnimation = new Timeline();
@@ -205,7 +140,49 @@ public class HelloController {
         fallAnimation.play();
     }
 
-    private void shiftPillar() throws InterruptedException {
+    public void walk(double distance) {
+        walking = true;
+        Timeline timeline = new Timeline();
+        double speed = 3.0; // Adjust the speed as needed
+        double[] distance_walked = {0.0};
+
+        // Calculate the duration based on distance and speed
+        double durationMillis = distance / speed;
+
+        AtomicInteger count = new AtomicInteger();
+
+        // Create a key frame for the animation
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
+            count.addAndGet(1);
+            System.out.println(Arrays.toString(distance_walked));
+            if (distance_walked[0] < distance) {
+                player1.setX(player1.getX() + speed);
+                distance_walked[0] += speed;
+            } else {
+                timeline.stop();
+                if (!isFlag) {
+                    fall();
+                }
+                if (isFlag) {
+                    System.out.println("??????");
+                    shiftPillar(count);
+                }
+            }
+        });
+        timeline.getKeyFrames().add(keyFrame);
+
+        // Set the cycle count to 1 since we want to play it only once
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
+        // Set the duration of the timeline
+        timeline.setDelay(Duration.millis(durationMillis));
+
+        // Play the timeline
+        timeline.play();
+    }
+
+    private void shiftPillar(AtomicInteger count) {
+        System.out.println("in shift pillar-----------");
         newpillar = Pillar1.generatePillar((int) (nextpillar.getLayoutX() + nextpillar.getWidth())).getPillar();
         System.out.println("Root is null: " + (root == null)); // prints true
         root.getChildren().remove(stick);
@@ -213,37 +190,36 @@ public class HelloController {
 
         newpillar.toFront();
 
-        System.out.println("i am the child i'm starting");
+        Timeline timeline = new Timeline();
 
-        // Create a SequentialTransition
-        SequentialTransition sequentialTransition = new SequentialTransition();
-
-        // Create a TranslateTransition for shifting the pillars
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), nextpillar);
-        translateTransition.setToX(nextpillar.getLayoutX() - 2);
-        sequentialTransition.getChildren().add(translateTransition);
-
-        // Create a TranslateTransition for shifting the new pillar
-        TranslateTransition newPillarTransition = new TranslateTransition(Duration.millis(500), newpillar);
-        newPillarTransition.setToX(newpillar.getLayoutX() - 2);
-        sequentialTransition.getChildren().add(newPillarTransition);
-
-        // Create a TranslateTransition for shifting the player
-        TranslateTransition playerTransition = new TranslateTransition(Duration.millis(500), player1);
-        playerTransition.setToX(player1.getLayoutX() - 2);
-        sequentialTransition.getChildren().add(playerTransition);
-
-        // Set the event handler for when the transition finishes
-        sequentialTransition.setOnFinished(event -> {
-            // Perform action when the transition finishes
-            stick = Stick.reset().getStick();
-            root.getChildren().add(stick);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
+            count.addAndGet(1);
+            if (curpillar.getWidth() < nextpillar.getLayoutX() + nextpillar.getWidth()) {
+                nextpillar.setLayoutX(nextpillar.getLayoutX() - 2);
+                newpillar.setLayoutX(newpillar.getLayoutX() - 2);
+                player1.setLayoutX(player1.getLayoutX() - 2);
+            } else{
+                timeline.stop();
+                System.out.println("resetting stick now-=---------------");
+                stick = Stick.reset().getStick();
+                root.getChildren().add(stick);
+                nextpillar = newpillar;
+            }
         });
+        timeline.getKeyFrames().add(keyFrame);
 
-        // Play the sequential transition
-        sequentialTransition.play();
+        // Set the cycle count to 1 since we want to play it only once
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
+        // Set the duration of the timeline
+        //timeline.setDelay(Duration.millis(500));
+
+        // Set the event handler for when the timeline finishes
+
+
+        // Play the timeline
+        timeline.play();
     }
-
 
 
 
