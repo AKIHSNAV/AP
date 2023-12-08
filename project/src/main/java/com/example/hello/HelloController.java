@@ -202,6 +202,7 @@ public class HelloController {
     private void shiftPillar(){
         newpillar = Pillar1.generatePillar((int)(nextpillar.getLayoutX() + nextpillar.getWidth())).getPillar();
         System.out.println("Root is null: " + (root == null)); //prints true
+        root.getChildren().remove(stick);
         root.getChildren().add(newpillar);
 
         newpillar.toFront();
@@ -233,7 +234,8 @@ public class HelloController {
         // Play the timeline
         timeline.play();
 
-
+        stick = Stick.reset().getStick();
+        root.getChildren().add(stick);
 
     }
 

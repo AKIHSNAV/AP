@@ -1,4 +1,5 @@
 package com.example.hello;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.Random;
@@ -37,9 +38,26 @@ interface Character {
 }
 class Stick{
     private int stickLength;
-    public Stick(){
-        this.stickLength = 0;
+
+    public Rectangle getStick() {
+        return stick;
     }
+
+    private Rectangle stick;
+    public Stick(){
+        stick = new Rectangle();
+        this.stick.setWidth(5);
+        this.stick.setHeight(20);
+        stick.setFill(Color.RED);
+        stick.setX(130);
+        stick.setY(220);
+        stick.toFront();
+    }
+
+    public Stick(int stickLength) {
+        this.stickLength = stickLength;
+    }
+
     public int getStickLength() {
         return stickLength;
     }
@@ -47,6 +65,10 @@ class Stick{
         this.stickLength = stickLength;
     }
     public void increaseLength(){}
+
+    public static Stick reset(){
+        return new Stick();
+    }
 
 
 }
