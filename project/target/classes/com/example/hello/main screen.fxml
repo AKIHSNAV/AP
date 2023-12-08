@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
    <children>
-      <ImageView fx:id="background" fitHeight="412.0" fitWidth="600.0" opacity="0.77" pickOnBounds="true">
+      <ImageView fx:id="background" fitHeight="412.0" fitWidth="600.0" onKeyPressed="#FlipHero" opacity="0.77" pickOnBounds="true">
          <image>
             <Image url="@../../../images/background.jpg" />
          </image>
@@ -43,6 +41,6 @@
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="397.0" layoutX="205.0" layoutY="8.0" onMousePressed="#growStick" onMouseReleased="#lowerStick" onTouchPressed="#growStick" onTouchReleased="#lowerStick" stroke="TRANSPARENT" strokeType="INSIDE" width="393.0" />
-      <Rectangle fx:id="stick" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="19.0" layoutX="130.0" layoutY="220.0" stroke="TRANSPARENT" strokeType="INSIDE" width="5.0" />
+      <Rectangle fx:id="stick" fill="#1f93ff00" height="19.0" layoutX="130.0" layoutY="225.0" stroke="TRANSPARENT" strokeType="INSIDE" width="5.0" />
    </children>
 </AnchorPane>

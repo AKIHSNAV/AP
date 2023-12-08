@@ -45,21 +45,47 @@ public class HelloController {
 
     private Boolean walking = false;
     private boolean isFlag = true;
-    private boolean isFlipped = true;
+    private boolean isFlipped = false;
     public HelloController() throws IOException {
     }
 
-    public void FlipHero(KeyEvent event) {
-        System.out.println("here");
-        KeyCode pressedKey = event.getCode();
-        if (pressedKey == KeyCode.SPACE) {
-            isFlipped = !isFlipped;
-            if (isFlipped) {
-                player1.setScaleX(1);
-            } else {
-                player1.setScaleX(-1);
+    public void FlipHero() {
+        if (player1 == null){
+            for (Node node : root.getChildren()) {
+                if (node instanceof ImageView && node.getId() != null && node.getId().equals("player1")) {
+                    player1 = (ImageView) node;
+                    System.out.println("Found player1 ImageView!");
+                    break; // Assuming there is only one node with ID "player1"
+                }
             }
         }
+
+        System.out.println("here in fliphero -------------");
+        int value;
+        if (isFlipped) {
+            value = 180;
+            isFlipped = false;
+            player1.setScaleY(1);
+            player1.setLayoutY(player1.getLayoutY()-55);
+        } else {
+            isFlipped = true;
+            value =0;
+            player1.setScaleY(-1);
+            player1.setLayoutY(player1.getLayoutY()+55);
+        }
+
+//        Timeline fallAnimation = new Timeline();
+//        fallAnimation.getKeyFrames().add(
+//                new KeyFrame(Duration.millis(16), event -> {
+//                    player1.setRotate(player1.getRotate() + 10);
+//                    if (player1.getRotate() == value) {
+//                        fallAnimation.stop();
+//                    }
+//                })
+//        );
+//        fallAnimation.setCycleCount(Timeline.INDEFINITE);
+//        fallAnimation.play();
+        System.out.println("flipped player one is null" + (player1 == null));
     }
 
     public void handleSwitchToMainScreen(MouseEvent event) throws IOException {
@@ -80,6 +106,13 @@ public class HelloController {
         stage.setScene(scene);
         root.requestFocus();
         stage.show();
+        scene.setOnKeyPressed(keyEvent -> {
+            System.out.println("in here");
+            if (keyEvent.getCode() == KeyCode.SPACE) {
+                System.out.println("calling from  handlestms");
+                FlipHero();
+            }
+        });
     }
     private Timeline growthTimeline;
     private int scaleFactor = 4;
@@ -108,6 +141,7 @@ public class HelloController {
 
     private Timeline fallTimeline;
     public void lowerStick() throws InterruptedException {
+        System.out.println("starting to lower stick player one is null" + player1 == null);
         if (growthTimeline != null && growthTimeline.getStatus().equals(Timeline.Status.RUNNING)) {
             growthTimeline.stop();
 
@@ -138,9 +172,11 @@ public class HelloController {
             walk(stick.getHeight());
         }
         walk(nextpillar.getLayoutX() - curpillar.getWidth() + nextpillar.getWidth() );
+        System.out.println("ending lowering stick player one is null" + player1 == null);
     }
 
     private void fall() {
+        System.out.println("starting fall player one is null" + (player1 == null));
         Timeline fallAnimation = new Timeline();
         fallAnimation.getKeyFrames().add(
                 new KeyFrame(Duration.millis(16), event -> {
@@ -153,9 +189,11 @@ public class HelloController {
         );
         fallAnimation.setCycleCount(Timeline.INDEFINITE);
         fallAnimation.play();
+        System.out.println("ending fall player one is null" + (player1 == null));
     }
 
     public void walk(double distance) {
+        System.out.println("starting walk player one is null" + (player1 == null));
         walking = true;
         Timeline timeline = new Timeline();
         double speed = 3.0; // Adjust the speed as needed
@@ -170,6 +208,7 @@ public class HelloController {
         KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
             count.addAndGet(1);
             System.out.println(Arrays.toString(distance_walked));
+            // call flip fn
             if (distance_walked[0] < distance) {
                 player1.setX(player1.getX() + speed);
                 distance_walked[0] += speed;
@@ -194,9 +233,12 @@ public class HelloController {
 
         // Play the timeline
         timeline.play();
+        System.out.println("ending walk, player one is null" + (player1 == null));
     }
 
     private void shiftPillar(AtomicInteger count) {
+
+        System.out.println("shifting pillar player one is null" + (player1 == null));
 //        System.out.println("in shift pillar-----------");
         newpillar = Pillar1.generatePillar((int) (nextpillar.getLayoutX() + nextpillar.getWidth())).getPillar();
         System.out.println("Root is null: " + (root == null)); // prints true
@@ -234,6 +276,7 @@ public class HelloController {
 
         // Play the timeline
         timeline.play();
+        System.out.println("ending shifting pillar player one is null" + (player1 == null));
     }
 
 
