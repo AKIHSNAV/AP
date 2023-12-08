@@ -15,7 +15,9 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(root);
         stage.setTitle("Stick Hero");
         stage.setScene(scene);
+        root.requestFocus();
         stage.show();
+
     }
 
     public static void main(String[] args) {

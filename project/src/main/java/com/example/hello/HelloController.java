@@ -5,6 +5,8 @@ import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,13 +45,28 @@ public class HelloController {
 
     private Boolean walking = false;
     private boolean isFlag = true;
+    private boolean isFlipped = true;
     public HelloController() throws IOException {
+    }
+
+    public void FlipHero(KeyEvent event) {
+        System.out.println("here");
+        KeyCode pressedKey = event.getCode();
+        if (pressedKey == KeyCode.SPACE) {
+            isFlipped = !isFlipped;
+            if (isFlipped) {
+                player1.setScaleX(1);
+            } else {
+                player1.setScaleX(-1);
+            }
+        }
     }
 
     public void handleSwitchToMainScreen(MouseEvent event) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("main screen.fxml"));
             this.root = loader.load();
+
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Root is null: " + (root == null));
@@ -58,10 +75,10 @@ public class HelloController {
         }
         // Now, root is properly initialized
         System.out.println("Root is null: " + (root == null));  // prints false
-
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        root.requestFocus();
         stage.show();
     }
     private Timeline growthTimeline;
@@ -123,8 +140,6 @@ public class HelloController {
         walk(nextpillar.getLayoutX() - curpillar.getWidth() + nextpillar.getWidth() );
     }
 
-
-
     private void fall() {
         Timeline fallAnimation = new Timeline();
         fallAnimation.getKeyFrames().add(
@@ -182,7 +197,7 @@ public class HelloController {
     }
 
     private void shiftPillar(AtomicInteger count) {
-        System.out.println("in shift pillar-----------");
+//        System.out.println("in shift pillar-----------");
         newpillar = Pillar1.generatePillar((int) (nextpillar.getLayoutX() + nextpillar.getWidth())).getPillar();
         System.out.println("Root is null: " + (root == null)); // prints true
         root.getChildren().remove(stick);
@@ -200,7 +215,7 @@ public class HelloController {
                 player1.setLayoutX(player1.getLayoutX() - 2);
             } else{
                 timeline.stop();
-                System.out.println("resetting stick now-=---------------");
+//                System.out.println("resetting stick now-=---------------");
                 stick = Stick.reset().getStick();
                 root.getChildren().add(stick);
                 nextpillar = newpillar;
