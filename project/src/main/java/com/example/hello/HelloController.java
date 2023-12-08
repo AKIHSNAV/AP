@@ -150,7 +150,11 @@ public class HelloController {
                 }
                 if(isFlag){
                     System.out.println("??????");
-                    shiftPillar();
+                    try {
+                        shiftPillar();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
 //                    nextpillar = newpillar;
                 }
                 timeline.stop();
@@ -199,7 +203,7 @@ public class HelloController {
         fallAnimation.play();
     }
 
-    private void shiftPillar(){
+    private void shiftPillar() throws InterruptedException {
         newpillar = Pillar1.generatePillar((int)(nextpillar.getLayoutX() + nextpillar.getWidth())).getPillar();
         System.out.println("Root is null: " + (root == null)); //prints true
         root.getChildren().remove(stick);
@@ -207,33 +211,40 @@ public class HelloController {
 
         newpillar.toFront();
 
-        Timeline timeline = new Timeline();
+        Thread child = new Thread(() -> {
+            System.out.println("i am the child i'm starting");
+            Timeline timeline = new Timeline();
 
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
+            KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
 
-            if (curpillar.getWidth() < nextpillar.getLayoutX() + nextpillar.getWidth()) {
-                nextpillar.setLayoutX(nextpillar.getLayoutX() - 2);
-                newpillar.setLayoutX(newpillar.getLayoutX() - 2);
-                player1.setLayoutX(player1.getLayoutX() - 2);
+                if (curpillar.getWidth() < nextpillar.getLayoutX() + nextpillar.getWidth()) {
+                    nextpillar.setLayoutX(nextpillar.getLayoutX() - 2);
+                    newpillar.setLayoutX(newpillar.getLayoutX() - 2);
+                    player1.setLayoutX(player1.getLayoutX() - 2);
 
-            }
+                }
+            });
+            timeline.getKeyFrames().add(keyFrame);
+            EventHandler<ActionEvent> onFinished = (ActionEvent event) -> {
+
+            };
+            // Set the event handler for when the timeline finishes
+            timeline.setOnFinished(onFinished);
+
+            // Set the cycle count to 1 since we want to play it only once
+            timeline.setCycleCount(Timeline.INDEFINITE);
+
+            // Set the duration of the timeline
+            timeline.setDelay(Duration.millis(500));
+
+            // Play the timeline
+            timeline.play();
+            //timeline.stop();
+            System.out.println(" i am the child, i'm done");
         });
-        timeline.getKeyFrames().add(keyFrame);
-        EventHandler<ActionEvent> onFinished = (ActionEvent event) -> {
-
-        };
-        // Set the event handler for when the timeline finishes
-        timeline.setOnFinished(onFinished);
-
-        // Set the cycle count to 1 since we want to play it only once
-        timeline.setCycleCount(Timeline.INDEFINITE);
-
-        // Set the duration of the timeline
-        timeline.setDelay(Duration.millis(500));
-
-        // Play the timeline
-        timeline.play();
-
+        child.start();
+        child.join();
+        System.out.println("I waited for my child he's here i will run now");
         stick = Stick.reset().getStick();
         root.getChildren().add(stick);
 
