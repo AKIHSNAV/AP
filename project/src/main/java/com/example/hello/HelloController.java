@@ -86,18 +86,7 @@ public class HelloController {
             player1.setScaleY(-1);
             player1.setLayoutY(player1.getLayoutY()+55);
         }
-
-//        Timeline fallAnimation = new Timeline();
-//        fallAnimation.getKeyFrames().add(
-//                new KeyFrame(Duration.millis(16), event -> {
-//                    player1.setRotate(player1.getRotate() + 10);
-//                    if (player1.getRotate() == value) {
-//                        fallAnimation.stop();
-//                    }
-//                })
-//        );
-//        fallAnimation.setCycleCount(Timeline.INDEFINITE);
-//        fallAnimation.play();
+        
         System.out.println("flipped player one is null" + (player1 == null));
     }
 
