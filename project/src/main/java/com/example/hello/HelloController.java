@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -27,6 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class HelloController {
     public ImageView background;
 
+
     private Stage stage;
     private Scene scene;
     @FXML
@@ -35,7 +37,8 @@ public class HelloController {
     private Rectangle nextpillar;
     @FXML
     private Rectangle curpillar;
-
+    @FXML
+    private Text cherryscore;
     private Rectangle newpillar;
 
     @FXML
@@ -57,7 +60,7 @@ public class HelloController {
     public void setCherrycount(int cherrycount) {
         this.cherrycount = cherrycount;
     }
-
+    @FXML
     private int cherrycount=0;
     public HelloController() throws IOException {
     }
@@ -239,6 +242,12 @@ public class HelloController {
             if (distance_walked[0] < distance) {
                 player1.setX(player1.getX() + speed);
                 distance_walked[0] += speed;
+                if (ischerry && player1.getScaleY() == -1 && player1.getX()>= cherry.getX() ){
+                    cherry.setOpacity(0);
+                    cherrycount++;
+                    ischerry = false;
+                    cherryscore.setText(Integer.toString(cherrycount));
+                }
             } else {
                 timeline.stop();
                 if (!isFlag) {

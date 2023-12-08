@@ -17,7 +17,7 @@
       <Rectangle fx:id="curpillar" fill="#dd0a0a" height="166.0" layoutY="244.0" opacity="0.3" stroke="BLACK" strokeType="INSIDE" width="135.0" />
       <Rectangle fx:id="nextpillar" height="166.0" layoutX="346.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="90.0" />
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#abb0b5" height="61.0" layoutX="233.0" layoutY="14.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" width="135.0" />
-      <Text layoutX="286.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+      <Text fx:id = "score" layoutX="286.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font size="56.0" />
          </font>
@@ -37,7 +37,7 @@
             <Image url="@../../../images/scorecherry.png" />
          </image>
       </ImageView>
-      <Text fill="#0b0b0b" layoutX="560.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
+      <Text fx:id = "cherryscore" fill="#0b0b0b" layoutX="560.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
          <font>
             <Font size="16.0" />
          </font>
