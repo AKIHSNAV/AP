@@ -173,31 +173,6 @@ public class HelloController {
         });
     }
 
-    public void SwitchToPauseScreen() throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("pause.fxml"));
-            AnchorPane newScreenRoot = loader.load();
-            Stage currentStage = (Stage) (root.getScene().getWindow());
-            Scene newScreenScene = new Scene(newScreenRoot);
-            currentStage.setScene(newScreenScene);
-            currentStage.show();
-
-            // Inject displayscore
-            HelloController controller = loader.getController();
-            controller.displayscore = (Text) newScreenRoot.lookup("#displayscore");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Root is null: " + (root == null));
-            // Handle the exception appropriately
-            return;  // Exit the method to prevent further execution
-        }
-        Platform.runLater(() -> {
-            // Now you can access displayscore safely
-            displayscore.setText(Integer.toString(nscore));
-        });
-    }
-
     public void SwitchToGameOverScreen() throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gameover.fxml"));
