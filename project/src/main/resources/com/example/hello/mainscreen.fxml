@@ -91,7 +91,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="0.0" arcWidth="0.0" fill="#1f93ff00" height="397.0" layoutX="205.0" layoutY="8.0" onMousePressed="#growStick" onMouseReleased="#lowerStick" onTouchPressed="#growStick" onTouchReleased="#lowerStick" stroke="TRANSPARENT" strokeType="INSIDE" width="393.0" />
+      <Rectangle arcHeight="0.0" arcWidth="0.0" fill="#1f93ff00" height="397.0" layoutX="205.0" layoutY="8.0" onMouseClicked="#startBounceAnimation" onMousePressed="#growStick" onMouseReleased="#lowerStick" onTouchPressed="#growStick" onTouchReleased="#lowerStick" stroke="TRANSPARENT" strokeType="INSIDE" width="393.0" />
       <Rectangle fx:id="stick" fill="TRANSPARENT" height="19.0" layoutX="130.0" layoutY="225.0" stroke="TRANSPARENT" strokeType="INSIDE" width="5.0" />
       <ImageView fx:id="cherry" fitHeight="52.0" fitWidth="46.0" layoutX="210.0" layoutY="239.0" opacity="0.02" pickOnBounds="true" preserveRatio="true">
          <image>

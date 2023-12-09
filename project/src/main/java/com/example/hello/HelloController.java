@@ -20,7 +20,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import javafx.animation.TranslateTransition;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
@@ -55,8 +55,6 @@ public class HelloController {
     private ImageView player1;
     @FXML
     private AnchorPane pausescreen;
-    private Image player2;
-
     private Boolean walking = false;
     private boolean isFlag = true;
     private boolean isFlipped = false;
@@ -76,6 +74,9 @@ public class HelloController {
 
     @FXML
     private Text score;
+    private TranslateTransition bounceTransition;
+
+
     public int getCherrycount() {
         return cherrycount;
     }
@@ -87,7 +88,6 @@ public class HelloController {
     private static int cherrycount = 0;
     public HelloController() throws IOException {
     }
-
     public void FlipHero() {
         if (player1 == null){
             for (Node node : root.getChildren()) {
@@ -115,7 +115,6 @@ public class HelloController {
 
         System.out.println("flipped player one is null" + (player1 == null));
     }
-
     public void handleSwitchToMainScreen(MouseEvent event) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("mainscreen.fxml"));
@@ -172,7 +171,6 @@ public class HelloController {
             }
         });
     }
-
     public void SwitchToGameOverScreen() throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gameover.fxml"));
@@ -196,7 +194,6 @@ public class HelloController {
             displayscore.setText(Integer.toString(nscore));
         });
     }
-
     public void SwitchToHomeScreen(MouseEvent event) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("homescreen.fxml"));
@@ -214,8 +211,6 @@ public class HelloController {
             // Handle the exception appropriately
         }
     }
-
-
     private Timeline growthTimeline;
     private int scaleFactor = 4;
     public void growStick() {
@@ -240,7 +235,6 @@ public class HelloController {
         }
 
     }
-
     private Timeline fallTimeline;
     public void lowerStick() throws InterruptedException {
         System.out.println("starting to lower stick player one is null" + player1 == null);
@@ -326,7 +320,7 @@ public class HelloController {
                     cherryscore.setText(Integer.toString(cherrycount));
                     score.setText(Integer.toString(nscore));
                 }
-                if (player1.getScaleY() == -1 && distance_walked[0] + curpillar.getWidth() >= nextpillar.getLayoutX() && distance_walked[0] >= nextpillar.getLayoutX() + nextpillar.getWidth()){
+                if (player1.getScaleY() == -1 && distance_walked[0] + curpillar.getWidth() >= nextpillar.getLayoutX() ){
                     fall();
                     timeline.stop();
                 }
@@ -435,4 +429,28 @@ public class HelloController {
         pausescreen.setOpacity(0);
         pausescreen.toBack();
     }
+
+    public void initialize() {
+        // Call this method from your FXML initialization
+        initializeBounceAnimation();
+    }
+
+    private void initializeBounceAnimation() {
+        // Set up the bouncing animation
+        bounceTransition = new TranslateTransition(Duration.seconds(1), player1);
+        bounceTransition.setByY(-50);  // Adjust the bouncing height as needed
+        bounceTransition.setCycleCount(TranslateTransition.INDEFINITE);
+        bounceTransition.setAutoReverse(true);
+    }
+
+    private void playBounceAnimation() {
+        if (bounceTransition != null) {
+            bounceTransition.play();
+        }
+    }
+    // Call this method when you want to start the bounce animation
+    public void startBounceAnimation() {
+        playBounceAnimation();
+    }
+
 }
