@@ -24,7 +24,7 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a5a6a8" height="313.0" layoutX="82.0" layoutY="46.0" opacity="0.71" stroke="BLACK" strokeType="INSIDE" width="462.0" />
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="216.0" layoutY="233.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="180.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="216.0" layoutY="233.0" onMouseClicked="#resume" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="180.0" />
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="280.0" layoutY="294.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="345.0" layoutY="294.0" onMouseClicked="#SwitchToHomeScreen" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="215.0" layoutY="294.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
@@ -33,7 +33,7 @@
             <Image url="@../../../images/restartwobg.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="326.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="326.0" layoutY="239.0" onMouseClicked="#resume" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/play%20wobg.png" />
          </image>
@@ -48,7 +48,7 @@
             <Image url="@../../../images/save.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="278.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="17" textAlignment="CENTER" wrappingWidth="51.0">
+      <Text fx:id="displayscore" fill="WHITE" layoutX="278.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="51.0">
          <font>
             <Font name="System Bold" size="40.0" />
          </font>
@@ -58,7 +58,7 @@
             <Font size="52.0" />
          </font>
       </Text>
-      <Text layoutX="224.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="resume" textAlignment="CENTER" wrappingWidth="124.9124755859375">
+      <Text layoutX="224.0" layoutY="265.0" onMouseClicked="#resume" strokeType="OUTSIDE" strokeWidth="0.0" text="resume" textAlignment="CENTER" wrappingWidth="124.9124755859375">
          <font>
             <Font size="20.0" />
          </font>
@@ -73,7 +73,7 @@
             <Image url="@../../../images/scorecherry.png" />
          </image>
       </ImageView>
-      <Text fill="#0b0b0b" layoutX="570.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+      <Text fx:id="cherryscore" fill="#0b0b0b" layoutX="570.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font size="16.0" />
          </font>

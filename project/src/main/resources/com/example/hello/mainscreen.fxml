@@ -9,6 +9,55 @@
 
 <AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
    <children>
+      <AnchorPane fx:id="pausescreen" layoutX="1.0" layoutY="6.0" opacity="0.0" prefHeight="412.0" prefWidth="601.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a5a6a8" height="313.0" layoutX="82.0" layoutY="46.0" opacity="0.71" stroke="BLACK" strokeType="INSIDE" width="462.0" />
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="216.0" layoutY="233.0" onMouseClicked="#handleSwitchToMainScreen" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="180.0" />
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="280.0" layoutY="294.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="345.0" layoutY="294.0" onMouseClicked="#SwitchToHomeScreen" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="215.0" layoutY="294.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="286.0" layoutY="300.0" onMouseClicked="#handleSwitchToMainScreen" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/restartwobg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="326.0" layoutY="239.0" onMouseClicked="#handleSwitchToMainScreen" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/play%20wobg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="351.0" layoutY="300.0" onMouseClicked="#SwitchToHomeScreen" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/home.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="221.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/save.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="displayscore" fill="WHITE" layoutX="278.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="51.0">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+            <Text layoutX="216.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAUSED" textAlignment="CENTER">
+               <font>
+                  <Font size="52.0" />
+               </font>
+            </Text>
+            <Text layoutX="224.0" layoutY="265.0" onMouseClicked="#handleSwitchToMainScreen" strokeType="OUTSIDE" strokeWidth="0.0" text="resume" textAlignment="CENTER" wrappingWidth="124.9124755859375">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="217.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SCORE" textAlignment="CENTER" wrappingWidth="180.0">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
       <ImageView fx:id="background" fitHeight="412.0" fitWidth="600.0" opacity="0.77" pickOnBounds="true">
          <image>
             <Image url="@../../../images/background.jpg" />
@@ -22,12 +71,12 @@
             <Font size="56.0" />
          </font>
       </Text>
-      <ImageView fx:id="player1" fitHeight="120.0" fitWidth="84.0" layoutX="68.0" layoutY="186.0" onKeyPressed="#FlipHero" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player1" fitHeight="100.0" fitWidth="70.0" layoutX="78.0" layoutY="197.0" onKeyPressed="#FlipHero" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/stickherowobg.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="37.0" fitWidth="53.0" layoutX="6.0" layoutY="10.0" onMouseClicked="#SwitchToPauseScreen" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="37.0" fitWidth="53.0" layoutX="6.0" layoutY="10.0" onMouseClicked="#pause" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/pausewobg.png" />
          </image>
@@ -37,7 +86,7 @@
             <Image url="@../../../images/scorecherry.png" />
          </image>
       </ImageView>
-      <Text fx:id="cherryscore" fill="#0b0b0b" layoutX="560.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
+      <Text fx:id="cherryscore" fill="#0b0b0b" layoutX="560.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font size="16.0" />
          </font>

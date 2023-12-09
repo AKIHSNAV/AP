@@ -47,9 +47,14 @@ public class HelloController {
     private Rectangle newpillar;
 
     @FXML
+    private Text displayscore;
+
+    @FXML
     private Rectangle stick;
     @FXML
     private ImageView player1;
+    @FXML
+    private AnchorPane pausescreen;
     private Image player2;
 
     private Boolean walking = false;
@@ -172,10 +177,14 @@ public class HelloController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("pause.fxml"));
             AnchorPane newScreenRoot = loader.load();
-            Stage currentStage = (Stage)(root.getScene().getWindow());
+            Stage currentStage = (Stage) (root.getScene().getWindow());
             Scene newScreenScene = new Scene(newScreenRoot);
             currentStage.setScene(newScreenScene);
             currentStage.show();
+
+            // Inject displayscore
+            HelloController controller = loader.getController();
+            controller.displayscore = (Text) newScreenRoot.lookup("#displayscore");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -183,7 +192,12 @@ public class HelloController {
             // Handle the exception appropriately
             return;  // Exit the method to prevent further execution
         }
+        Platform.runLater(() -> {
+            // Now you can access displayscore safely
+            displayscore.setText(Integer.toString(nscore));
+        });
     }
+
     public void SwitchToGameOverScreen() throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gameover.fxml"));
@@ -192,6 +206,9 @@ public class HelloController {
             Scene newScreenScene = new Scene(newScreenRoot);
             currentStage.setScene(newScreenScene);
             currentStage.show();
+            // Inject displayscore
+            HelloController controller = loader.getController();
+            controller.displayscore = (Text) newScreenRoot.lookup("#displayscore");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -199,8 +216,12 @@ public class HelloController {
             // Handle the exception appropriately
             return;  // Exit the method to prevent further execution
         }
-
+        Platform.runLater(() -> {
+            // Now you can access displayscore safely
+            displayscore.setText(Integer.toString(nscore));
+        });
     }
+
     public void SwitchToHomeScreen(MouseEvent event) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("homescreen.fxml"));
@@ -330,7 +351,7 @@ public class HelloController {
                     cherryscore.setText(Integer.toString(cherrycount));
                     score.setText(Integer.toString(nscore));
                 }
-                if (player1.getScaleY() == -1 && distance_walked[0] + curpillar.getWidth() >= nextpillar.getLayoutX() ){
+                if (player1.getScaleY() == -1 && distance_walked[0] + curpillar.getWidth() >= nextpillar.getLayoutX() && distance_walked[0] >= nextpillar.getLayoutX() + nextpillar.getWidth()){
                     fall();
                     timeline.stop();
                 }
@@ -422,20 +443,6 @@ public class HelloController {
             nocherrymessage.setOpacity(1);
         }
     }
-    public void restart() throws InterruptedException{
-        //System.out.println("in revive"+ getCherrycount());
-//        if (getCherrycount()>= 5){
-//            confirmrevive.toFront();
-//            confirmrevive.setOpacity(1);
-//            reset = true;
-//            System.out.println("idhar");
-//
-//        } else {
-//            nocherrymessage.toFront();
-//            nocherrymessage.setOpacity(1);
-//        }
-        //restart = true;
-    }
     public void insufficientcherry(){
         nocherrymessage.setOpacity(0);
         nocherrymessage.toBack();
@@ -443,6 +450,14 @@ public class HelloController {
     public void notsure(){
         confirmrevive.setOpacity(0);
         confirmrevive.toBack();
-        reset =0;
+        reset = 0;
+    }
+    public void pause(){
+        pausescreen.toFront();
+        pausescreen.setOpacity(1);
+    }
+    public void resume(){
+        pausescreen.setOpacity(0);
+        pausescreen.toBack();
     }
 }

@@ -28,7 +28,7 @@
                   <Image url="@../../../images/scorecherry.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="247.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- 2" textAlignment="CENTER" wrappingWidth="39.0">
+            <Text fill="WHITE" layoutX="247.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- 5" textAlignment="CENTER" wrappingWidth="39.0">
                <font>
                   <Font size="27.0" />
                </font>
@@ -66,7 +66,7 @@
             <Font size="52.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="288.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="17" textAlignment="CENTER" wrappingWidth="51.0">
+      <Text fx:id="displayscore" fill="WHITE" layoutX="288.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="51.0">
          <font>
             <Font name="System Bold" size="40.0" />
          </font>
