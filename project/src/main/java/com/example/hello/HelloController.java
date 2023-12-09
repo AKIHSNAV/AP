@@ -58,7 +58,7 @@ public class HelloController {
     @FXML
     private ImageView cherry;
     private boolean ischerry=false;
-    private static boolean reset=false;
+    private static int reset= 0;
     private static int nscore=0;
 
     public Text getScore() {
@@ -131,7 +131,6 @@ public class HelloController {
         stage.show();
 
         Platform.runLater(() -> {
-            System.out.println("running now");
             for (Node node : root.getChildren()) {
                 if (node instanceof Text && node.getId() != null && node.getId().equals("cherryscore")) {
                     cherryscore = (Text) node;
@@ -144,11 +143,21 @@ public class HelloController {
                     break; // Assuming there is only one node with ID "player1"
                 }
             }
-            System.out.println(cherryscore == null);
-            cherryscore.setText(Integer.toString(cherrycount));
-            System.out.println(score == null);
-            score.setText(Integer.toString(nscore));
-            reset = false;
+            if (reset>0){
+                cherryscore.setText(Integer.toString(cherrycount - reset));
+
+                //System.out.println(score == null);
+                score.setText(Integer.toString(nscore));
+                reset = 0;
+            } else{
+                cherryscore.setText("0");
+                nscore= 0;
+                cherrycount =0;
+                //System.out.println(score == null);
+                score.setText("0");
+                //reset = false;
+            }
+
         });
         scene.setOnKeyPressed(keyEvent -> {
             System.out.println("in here");
@@ -403,19 +412,37 @@ public class HelloController {
 
     public void revive() throws InterruptedException{
         System.out.println("in revive"+ getCherrycount());
-        if (getCherrycount()>= 5){
+        if (getCherrycount()>= 1){
             confirmrevive.toFront();
             confirmrevive.setOpacity(1);
-            reset = true;
+            reset = 1;
             System.out.println("idhar");
-
         } else {
             nocherrymessage.toFront();
             nocherrymessage.setOpacity(1);
         }
     }
+    public void restart() throws InterruptedException{
+        //System.out.println("in revive"+ getCherrycount());
+//        if (getCherrycount()>= 5){
+//            confirmrevive.toFront();
+//            confirmrevive.setOpacity(1);
+//            reset = true;
+//            System.out.println("idhar");
+//
+//        } else {
+//            nocherrymessage.toFront();
+//            nocherrymessage.setOpacity(1);
+//        }
+        //restart = true;
+    }
     public void insufficientcherry(){
         nocherrymessage.setOpacity(0);
         nocherrymessage.toBack();
+    }
+    public void notsure(){
+        confirmrevive.setOpacity(0);
+        confirmrevive.toBack();
+        reset =0;
     }
 }

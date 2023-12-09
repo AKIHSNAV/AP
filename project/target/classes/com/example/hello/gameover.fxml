@@ -9,25 +9,10 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
    <children>
-      <AnchorPane fx:id="nocherrymessage" layoutX="10.0" layoutY="10.0" opacity="0.0" prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="RED" height="245.0" layoutX="115.0" layoutY="99.0" onMouseClicked="#revive" opacity="0.86" stroke="BLACK" strokeType="INSIDE" width="398.0" />
-            <Text fill="WHITE" layoutX="482.0" layoutY="123.0" onMouseClicked="#insufficientcherry" strokeType="OUTSIDE" strokeWidth="0.0" text="X" textAlignment="CENTER" wrappingWidth="32.33331298828125">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="162.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not Enough Cherries" textAlignment="CENTER">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="confirmrevive" layoutX="20.0" layoutY="20.0" opacity="0.0" prefHeight="400.0" prefWidth="600.0">
          <children>
             <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#020101" height="245.0" layoutX="101.0" layoutY="85.0" onMouseClicked="#revive" opacity="0.83" stroke="BLACK" strokeType="INSIDE" width="398.0" />
-            <Text fill="WHITE" layoutX="468.0" layoutY="108.0" onMouseClicked="#insufficientcherry" strokeType="OUTSIDE" strokeWidth="0.0" text="X" textAlignment="CENTER" wrappingWidth="32.33331298828125">
+            <Text fill="WHITE" layoutX="468.0" layoutY="108.0" onMouseClicked="#notsure" strokeType="OUTSIDE" strokeWidth="0.0" text="X" textAlignment="CENTER" wrappingWidth="32.33331298828125">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
@@ -49,6 +34,21 @@
                </font>
             </Text>
             <Text fill="WHITE" layoutX="254.0" layoutY="264.0" onMouseClicked="#handleSwitchToMainScreen" strokeType="OUTSIDE" strokeWidth="0.0" text="YES" textAlignment="CENTER" wrappingWidth="76.3333740234375">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="nocherrymessage" layoutX="10.0" layoutY="10.0" opacity="0.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="RED" height="245.0" layoutX="115.0" layoutY="99.0" onMouseClicked="#revive" opacity="0.86" stroke="BLACK" strokeType="INSIDE" width="398.0" />
+            <Text fill="WHITE" layoutX="482.0" layoutY="123.0" onMouseClicked="#insufficientcherry" strokeType="OUTSIDE" strokeWidth="0.0" text="X" textAlignment="CENTER" wrappingWidth="32.33331298828125">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="162.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not Enough Cherries" textAlignment="CENTER">
                <font>
                   <Font size="33.0" />
                </font>
@@ -89,7 +89,7 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="RED" height="83.0" layoutX="257.0" layoutY="209.0" onMouseClicked="#revive" opacity="0.66" stroke="BLACK" strokeType="INSIDE" width="114.0" />
-      <Text fill="WHITE" layoutX="261.0" layoutY="256.0" onMouseClicked="#handleSwitchToMainScreen" strokeType="OUTSIDE" strokeWidth="0.0" text="REVIVE" textAlignment="CENTER" wrappingWidth="105.33332824707031">
+      <Text fill="WHITE" layoutX="261.0" layoutY="256.0" onMouseClicked="#revive" strokeType="OUTSIDE" strokeWidth="0.0" text="REVIVE" textAlignment="CENTER" wrappingWidth="105.33332824707031">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
