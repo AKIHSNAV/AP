@@ -45,7 +45,7 @@
       </ImageView>
       <ImageView fitHeight="39.0" fitWidth="42.0" layoutX="492.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/cherry%20wobg.png" />
+            <Image url="@../../../images/scorecherry.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="63.0" fitWidth="33.0" layoutX="361.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true">

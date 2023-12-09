@@ -2,6 +2,7 @@ package com.example.hello;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,8 +28,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class HelloController {
     public ImageView background;
-
-    private Rectangle gameover;
+    @FXML
+    private AnchorPane gameover;
+    @FXML
+    private AnchorPane nocherrymessage;
+    @FXML
+    private AnchorPane confirmrevive;
     private Stage stage;
     private Scene scene;
     @FXML
@@ -53,6 +58,19 @@ public class HelloController {
     @FXML
     private ImageView cherry;
     private boolean ischerry=false;
+    private static boolean reset=false;
+    private static int nscore=0;
+
+    public Text getScore() {
+        return score;
+    }
+
+    public void setScore(Text score) {
+        this.score = score;
+    }
+
+    @FXML
+    private Text score;
     public int getCherrycount() {
         return cherrycount;
     }
@@ -61,7 +79,7 @@ public class HelloController {
         this.cherrycount = cherrycount;
     }
     @FXML
-    private int cherrycount=0;
+    private static int cherrycount=1;
     public HelloController() throws IOException {
     }
 
@@ -89,11 +107,12 @@ public class HelloController {
             player1.setScaleY(-1);
             player1.setLayoutY(player1.getLayoutY()+55);
         }
-        
+
         System.out.println("flipped player one is null" + (player1 == null));
     }
 
     public void handleSwitchToMainScreen(MouseEvent event) throws IOException {
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("main screen.fxml"));
             this.root = loader.load();
@@ -111,6 +130,28 @@ public class HelloController {
         stage.setScene(scene);
         root.requestFocus();
         stage.show();
+
+
+        Platform.runLater(() -> {
+            System.out.println("running now");
+            for (Node node : root.getChildren()) {
+                if (node instanceof Text && node.getId() != null && node.getId().equals("cherryscore")) {
+                    cherryscore = (Text) node;
+                    break; // Assuming there is only one node with ID "player1"
+                }
+            }
+            for (Node node : root.getChildren()) {
+                if (node instanceof Text && node.getId() != null && node.getId().equals("score")) {
+                    score = (Text) node;
+                    break; // Assuming there is only one node with ID "player1"
+                }
+            }
+            System.out.println(cherryscore == null);
+            cherryscore.setText(Integer.toString(cherrycount));
+            System.out.println(score == null);
+            score.setText(Integer.toString(nscore));
+            reset = false;
+        });
         scene.setOnKeyPressed(keyEvent -> {
             System.out.println("in here");
             if (keyEvent.getCode() == KeyCode.SPACE) {
@@ -132,7 +173,7 @@ public class HelloController {
     }
     public void SwitchToGameOverScreen() throws IOException {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("gameover.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("game over.fxml"));
             AnchorPane newScreenRoot = loader.load();
             Stage currentStage = (Stage)(root.getScene().getWindow());
             Scene newScreenScene = new Scene(newScreenRoot);
@@ -146,9 +187,7 @@ public class HelloController {
             return;  // Exit the method to prevent further execution
         }
 
-
     }
-
 
     private Timeline growthTimeline;
     private int scaleFactor = 4;
@@ -231,7 +270,6 @@ public class HelloController {
         fallAnimation.play();
 
     }
-
     public void walk(double distance) {
         System.out.println("starting walk player one is null" + (player1 == null));
         walking = true;
@@ -254,9 +292,12 @@ public class HelloController {
                 distance_walked[0] += speed;
                 if (ischerry && player1.getScaleY() == -1 && player1.getX()>= cherry.getX() ){
                     cherry.setOpacity(0);
-                    cherrycount++;
+                    cherrycount+=1;
+                    setCherrycount(cherrycount);
+                    nscore++;
                     ischerry = false;
                     cherryscore.setText(Integer.toString(cherrycount));
+                    score.setText(Integer.toString(nscore));
                 }
                 if (player1.getScaleY() == -1 && distance_walked[0] + curpillar.getWidth() >= nextpillar.getLayoutX() ){
                     fall();
@@ -269,7 +310,10 @@ public class HelloController {
                 }
                 if (isFlag) {
                     System.out.println("??????");
+                    nscore++;
+                    score.setText(Integer.toString(nscore));
                     shiftPillar(count);
+
                 }
             }
         });
@@ -299,7 +343,7 @@ public class HelloController {
 
         Timeline timeline = new Timeline();
 
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(5), (ActionEvent event) -> {
             count.addAndGet(1);
             if (curpillar.getWidth() < nextpillar.getLayoutX() + nextpillar.getWidth()) {
                 nextpillar.setLayoutX(nextpillar.getLayoutX() - 2);
@@ -347,15 +391,21 @@ public class HelloController {
     }
 
     public void revive() throws InterruptedException{
-        System.out.println("in revive");
-        if (cherrycount >= 1){
-            player1.setLayoutY(244);
-            player1.setLayoutX(nextpillar.getLayoutX() - curpillar.getWidth() + nextpillar.getWidth());
-            player1.setScaleX(1);
+        System.out.println("in revive"+ getCherrycount());
+        if (getCherrycount()>= 1){
+            confirmrevive.toFront();
+            confirmrevive.setOpacity(1);
+            reset = true;
+            System.out.println("idhar");
+
         } else {
-            gameover.setOpacity(1);
+            nocherrymessage.toFront();
+            nocherrymessage.setOpacity(1);
         }
     }
 
-
+    public void insufficientcherry(){
+        nocherrymessage.setOpacity(0);
+        nocherrymessage.toBack();
+    }
 }
