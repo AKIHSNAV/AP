@@ -1,9 +1,14 @@
 package com.example.hello;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Pillar1 extends Rectangle {
@@ -50,5 +55,40 @@ public class Pillar1 extends Rectangle {
 
     public void setPillar(Rectangle pillar) {
         this.pillar = pillar;
+    }
+
+    public static void shiftPillar(AtomicInteger count, Rectangle curpillar, Rectangle nextpillar, Rectangle newpillar) {
+        Rectangle stick = HelloController.stick.getStick();
+        //System.out.println("shifting pillar player one is null" + (HelloController.hero.getPlayer1() == null));
+        newpillar = Pillar1.generatePillar((int) (nextpillar.getLayoutX() + nextpillar.getWidth())).getPillar();
+        //System.out.println("Root is null: " + (HelloController.root == null)); // prints true
+        HelloController.root.getChildren().remove(stick);
+        HelloController.root.getChildren().add(newpillar);
+
+        newpillar.toFront();
+
+        Timeline timeline = new Timeline();
+
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(5), (ActionEvent event) -> {
+            count.addAndGet(1);
+            if (curpillar.getWidth() < nextpillar.getLayoutX() + nextpillar.getWidth()) {
+                nextpillar.setLayoutX(nextpillar.getLayoutX() - 2);
+                HelloController.newpillar.setLayoutX(HelloController.newpillar.getLayoutX() - 2);
+                HelloController.hero.getPlayer1().setLayoutX(HelloController.hero.getPlayer1().getLayoutX() - 2);
+            } else{
+                timeline.stop();
+                HelloController.stick.reset();
+//                stick = Stick.reset().getStick();
+//                HelloController.root.getChildren().add(stick);
+//                HelloController.nextpillar = HelloController.newpillar;
+                HelloController.generatecherry(HelloController.curpillar,HelloController.nextpillar);
+            }
+        });
+        timeline.getKeyFrames().add(keyFrame);
+
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
+        timeline.play();
+        System.out.println("ending shifting pillar player one is null" + (HelloController.hero.getPlayer1() == null));
     }
 }
