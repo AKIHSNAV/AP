@@ -219,6 +219,7 @@ public class HelloController {
     private Timeline growthTimeline;
     private int scaleFactor = 4;
     public void growStick() {
+
         double scaleFactor = 4; // You can adjust the scale factor as needed
 
         // Check if the timeline is not null and already running
@@ -272,8 +273,14 @@ public class HelloController {
             System.out.println("stick is short");
             isFlag = false;
             walk(stick.getHeight());
+        } else if (stick.getHeight() + curpillar.getWidth() >= nextpillar.getLayoutX() && curpillar.getWidth() + stick.getHeight() <= nextpillar.getLayoutX() + nextpillar.getWidth()){
+            System.out.println("stick is sufficiently long");
+            walk(nextpillar.getLayoutX() + nextpillar.getWidth() - curpillar.getWidth() );
+        } else{
+            System.out.println("stick too long");
+            walk(stick.getHeight());
         }
-        walk(nextpillar.getLayoutX() - curpillar.getWidth() + nextpillar.getWidth() );
+
         System.out.println("ending lowering stick player one is null" + player1 == null);
     }
 
@@ -312,7 +319,7 @@ public class HelloController {
         // Create a key frame for the animation
         KeyFrame keyFrame = new KeyFrame(Duration.millis(16), (ActionEvent event) -> {
             count.addAndGet(1);
-            System.out.println(Arrays.toString(distance_walked));
+            //System.out.println(Arrays.toString(distance_walked));
             // call flip fn
             if (distance_walked[0] < distance) {
                 player1.setX(player1.getX() + speed);
@@ -326,16 +333,20 @@ public class HelloController {
                     cherryscore.setText(Integer.toString(cherrycount));
                     score.setText(Integer.toString(nscore));
                 }
-                if (player1.getScaleY() == -1 && distance_walked[0] + curpillar.getWidth() >= nextpillar.getLayoutX() && distance_walked[0] >= nextpillar.getLayoutX() + nextpillar.getWidth()){
-                    fall();
-                    timeline.stop();
-                }
             } else {
                 timeline.stop();
-                if (!isFlag) {
+                if (!isFlag) {    //stick is short -> fall
+                    System.out.println("stick is short i will fall now");
                     fall();
                 }
-                if (isFlag) {
+//                System.out.println("distance" + distance);
+//                System.out.println("curr width" + curpillar.getWidth() );
+//                System.out.println(nextpillar.getLayoutX() + nextpillar.getWidth());
+                else if (player1.getScaleY() ==1 && distance + curpillar.getWidth() > nextpillar.getLayoutX() + nextpillar.getWidth()) {
+                    System.out.println("i should fall---------");
+                    fall();
+                }
+                else {
                     System.out.println("??????");
                     nscore++;
                     score.setText(Integer.toString(nscore));
