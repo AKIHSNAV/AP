@@ -79,7 +79,7 @@ public class HelloController {
         this.cherrycount = cherrycount;
     }
     @FXML
-    private static int cherrycount=1;
+    private static int cherrycount = 0;
     public HelloController() throws IOException {
     }
 
@@ -112,9 +112,8 @@ public class HelloController {
     }
 
     public void handleSwitchToMainScreen(MouseEvent event) throws IOException {
-
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main screen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("mainscreen.fxml"));
             this.root = loader.load();
 
         } catch (IOException e) {
@@ -130,7 +129,6 @@ public class HelloController {
         stage.setScene(scene);
         root.requestFocus();
         stage.show();
-
 
         Platform.runLater(() -> {
             System.out.println("running now");
@@ -161,19 +159,25 @@ public class HelloController {
         });
     }
 
-    public void SwitchToPauseScreen(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("pause screen.fxml"));
-        AnchorPane newScreenRoot = loader.load();
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene newScreenScene = new Scene(newScreenRoot);
-        scene = new Scene(newScreenRoot);
-        // Set the new scene to the current stage
-        currentStage.setScene(newScreenScene);
-        currentStage.show();
+    public void SwitchToPauseScreen() throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("pause.fxml"));
+            AnchorPane newScreenRoot = loader.load();
+            Stage currentStage = (Stage)(root.getScene().getWindow());
+            Scene newScreenScene = new Scene(newScreenRoot);
+            currentStage.setScene(newScreenScene);
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Root is null: " + (root == null));
+            // Handle the exception appropriately
+            return;  // Exit the method to prevent further execution
+        }
     }
     public void SwitchToGameOverScreen() throws IOException {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("game over.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("gameover.fxml"));
             AnchorPane newScreenRoot = loader.load();
             Stage currentStage = (Stage)(root.getScene().getWindow());
             Scene newScreenScene = new Scene(newScreenRoot);
@@ -188,6 +192,24 @@ public class HelloController {
         }
 
     }
+    public void SwitchToHomeScreen(MouseEvent event) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("homescreen.fxml"));
+//            AnchorPane newScreenRoot = loader.load();
+            this.root = loader.load();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            Stage currentStage = (Stage)(root.getScene().getWindow());
+            Scene newScreenScene = new Scene(root);
+//            currentStage.setScene(newScreenScene);
+            stage.setScene(newScreenScene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load homescreen.fxml");
+            // Handle the exception appropriately
+        }
+    }
+
 
     private Timeline growthTimeline;
     private int scaleFactor = 4;
@@ -313,7 +335,6 @@ public class HelloController {
                     nscore++;
                     score.setText(Integer.toString(nscore));
                     shiftPillar(count);
-
                 }
             }
         });
@@ -333,7 +354,6 @@ public class HelloController {
     private void shiftPillar(AtomicInteger count) {
 
         System.out.println("shifting pillar player one is null" + (player1 == null));
-//        System.out.println("in shift pillar-----------");
         newpillar = Pillar1.generatePillar((int) (nextpillar.getLayoutX() + nextpillar.getWidth())).getPillar();
         System.out.println("Root is null: " + (root == null)); // prints true
         root.getChildren().remove(stick);
@@ -351,7 +371,6 @@ public class HelloController {
                 player1.setLayoutX(player1.getLayoutX() - 2);
             } else{
                 timeline.stop();
-//                System.out.println("resetting stick now-=---------------");
                 stick = Stick.reset().getStick();
                 root.getChildren().add(stick);
                 nextpillar = newpillar;
@@ -360,16 +379,8 @@ public class HelloController {
         });
         timeline.getKeyFrames().add(keyFrame);
 
-        // Set the cycle count to 1 since we want to play it only once
         timeline.setCycleCount(Timeline.INDEFINITE);
 
-        // Set the duration of the timeline
-        //timeline.setDelay(Duration.millis(500));
-
-        // Set the event handler for when the timeline finishes
-
-
-        // Play the timeline
         timeline.play();
         System.out.println("ending shifting pillar player one is null" + (player1 == null));
     }
@@ -392,7 +403,7 @@ public class HelloController {
 
     public void revive() throws InterruptedException{
         System.out.println("in revive"+ getCherrycount());
-        if (getCherrycount()>= 1){
+        if (getCherrycount()>= 5){
             confirmrevive.toFront();
             confirmrevive.setOpacity(1);
             reset = true;
@@ -403,7 +414,6 @@ public class HelloController {
             nocherrymessage.setOpacity(1);
         }
     }
-
     public void insufficientcherry(){
         nocherrymessage.setOpacity(0);
         nocherrymessage.toBack();

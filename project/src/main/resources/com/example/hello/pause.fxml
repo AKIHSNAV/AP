@@ -26,9 +26,9 @@
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a5a6a8" height="313.0" layoutX="82.0" layoutY="46.0" opacity="0.71" stroke="BLACK" strokeType="INSIDE" width="462.0" />
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="216.0" layoutY="233.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="180.0" />
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="280.0" layoutY="294.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="345.0" layoutY="294.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="345.0" layoutY="294.0" onMouseClicked="#SwitchToHomeScreen" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="215.0" layoutY="294.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-      <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="286.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="286.0" layoutY="300.0" onMouseClicked="#handleSwitchToMainScreen" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/restartwobg.png" />
          </image>
@@ -38,7 +38,7 @@
             <Image url="@../../../images/play%20wobg.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="351.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="351.0" layoutY="300.0" onMouseClicked="#SwitchToHomeScreen" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/home.png" />
          </image>
@@ -70,10 +70,10 @@
       </Text>
       <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="571.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/cherry%20wobg.png" />
+            <Image url="@../../../images/scorecherry.png" />
          </image>
       </ImageView>
-      <Text fill="#0b0b0b" layoutX="570.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
+      <Text fill="#0b0b0b" layoutX="570.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font size="16.0" />
          </font>

@@ -14,10 +14,10 @@
             <Image url="@../../../images/background.jpg" />
          </image>
       </ImageView>
-      <Rectangle fx:id="curpillar" fill="#dd0a0a" height="166.0" layoutY="244.0" opacity="0.3" stroke="BLACK" strokeType="INSIDE" width="135.0" />
+      <Rectangle fx:id="curpillar" height="166.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="135.0" />
       <Rectangle fx:id="nextpillar" height="166.0" layoutX="346.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="90.0" />
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#abb0b5" height="61.0" layoutX="233.0" layoutY="14.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" width="135.0" />
-      <Text fx:id = "score" layoutX="286.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+      <Text fx:id="score" layoutX="286.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font size="56.0" />
          </font>
@@ -37,14 +37,14 @@
             <Image url="@../../../images/scorecherry.png" />
          </image>
       </ImageView>
-      <Text fx:id = "cherryscore" fill="#0b0b0b" layoutX="560.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
+      <Text fx:id="cherryscore" fill="#0b0b0b" layoutX="560.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="397.0" layoutX="205.0" layoutY="8.0" onMousePressed="#growStick" onMouseReleased="#lowerStick" onTouchPressed="#growStick" onTouchReleased="#lowerStick" stroke="TRANSPARENT" strokeType="INSIDE" width="393.0" />
-      <Rectangle fx:id="stick" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="19.0" layoutX="130.0" layoutY="220.0" stroke="TRANSPARENT" strokeType="INSIDE" width="5.0" />
-      <ImageView fx:id="cherry" fitHeight="52.0" fitWidth="46.0" layoutX="210.0" layoutY="239.0" opacity="0.18" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="0.0" arcWidth="0.0" fill="#1f93ff00" height="397.0" layoutX="205.0" layoutY="8.0" onMousePressed="#growStick" onMouseReleased="#lowerStick" onTouchPressed="#growStick" onTouchReleased="#lowerStick" stroke="TRANSPARENT" strokeType="INSIDE" width="393.0" />
+      <Rectangle fx:id="stick" fill="TRANSPARENT" height="19.0" layoutX="130.0" layoutY="225.0" stroke="TRANSPARENT" strokeType="INSIDE" width="5.0" />
+      <ImageView fx:id="cherry" fitHeight="52.0" fitWidth="46.0" layoutX="210.0" layoutY="239.0" opacity="0.02" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/scorecherry.png" />
          </image>
