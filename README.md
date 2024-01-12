@@ -9,7 +9,7 @@
 - 1 cherry is required for reviving the player
 - Game can be puased, resumed, and restarted.
 
-## Screenshots
+## Demo
 ![finaldemo](https://github.com/AKIHSNAV/StickHero/assets/119172207/b25ed090-f783-4120-a215-a054c35c2e73)
 
 ## Object-Oriented Programming Concepts in the Code:
