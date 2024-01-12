@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
+   <children>
+      <AnchorPane fx:id="pausescreen" layoutX="1.0" layoutY="6.0" opacity="0.0" prefHeight="412.0" prefWidth="601.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a5a6a8" height="313.0" layoutX="82.0" layoutY="46.0" opacity="0.71" stroke="BLACK" strokeType="INSIDE" width="462.0" />
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="216.0" layoutY="233.0" onMouseClicked="#resume" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="180.0" />
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="280.0" layoutY="294.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="345.0" layoutY="294.0" onMouseClicked="#SwitchToHomeScreen" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="215.0" layoutY="294.0" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="286.0" layoutY="300.0" onMouseClicked="#handleSwitchToMainScreen" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/restartwobg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="326.0" layoutY="239.0" onMouseClicked="#resume" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/play%20wobg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="351.0" layoutY="300.0" onMouseClicked="#SwitchToHomeScreen" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/home.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="221.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/save.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="displayscore" fill="WHITE" layoutX="278.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="51.0">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+            <Text layoutX="216.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAUSED" textAlignment="CENTER">
+               <font>
+                  <Font size="52.0" />
+               </font>
+            </Text>
+            <Text layoutX="224.0" layoutY="265.0" onMouseClicked="#resume" strokeType="OUTSIDE" strokeWidth="0.0" text="resume" textAlignment="CENTER" wrappingWidth="124.9124755859375">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="217.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SCORE" textAlignment="CENTER" wrappingWidth="180.0">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="background" fitHeight="412.0" fitWidth="600.0" opacity="0.77" pickOnBounds="true">
+         <image>
+            <Image url="@../../../images/background.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="curpillar" height="166.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="135.0" />
+      <Rectangle fx:id="nextpillar" height="166.0" layoutX="346.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="90.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#abb0b5" height="61.0" layoutX="233.0" layoutY="14.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" width="135.0" />
+      <Text fx:id="score" layoutX="286.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font size="56.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="player1" fitHeight="100.0" fitWidth="70.0" layoutX="78.0" layoutY="197.0" onKeyPressed="#FlipHero" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/stickherowobg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="37.0" fitWidth="53.0" layoutX="6.0" layoutY="10.0" onMouseClicked="#pause" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/pausewobg.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="scorecherry" fitHeight="37.0" fitWidth="37.0" layoutX="561.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/scorecherry.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="cherryscore" fill="#0b0b0b" layoutX="560.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="0.0" arcWidth="0.0" fill="#1f93ff00" height="397.0" layoutX="205.0" layoutY="8.0" onMousePressed="#growStick" onMouseReleased="#lowerStick" onTouchPressed="#growStick" onTouchReleased="#lowerStick" stroke="TRANSPARENT" strokeType="INSIDE" width="393.0" />
+      <Rectangle fx:id="stick" fill="TRANSPARENT" height="19.0" layoutX="130.0" layoutY="225.0" stroke="TRANSPARENT" strokeType="INSIDE" width="5.0" />
+      <ImageView fx:id="cherry" fitHeight="52.0" fitWidth="46.0" layoutX="210.0" layoutY="239.0" opacity="0.02" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/scorecherry.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

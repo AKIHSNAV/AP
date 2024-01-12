@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
+   <children>
+      <AnchorPane fx:id="confirmrevive" layoutX="20.0" layoutY="20.0" opacity="0.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#020101" height="245.0" layoutX="101.0" layoutY="85.0" onMouseClicked="#revive" opacity="0.83" stroke="BLACK" strokeType="INSIDE" width="398.0" />
+            <Text fill="WHITE" layoutX="468.0" layoutY="108.0" onMouseClicked="#notsure" strokeType="OUTSIDE" strokeWidth="0.0" text="X" textAlignment="CENTER" wrappingWidth="32.33331298828125">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#00ce26" height="53.0" layoutX="215.0" layoutY="226.0" onMouseClicked="#handleSwitchToMainScreen" stroke="#1eba48" strokeType="INSIDE" width="155.0" />
+            <Text fill="WHITE" layoutX="157.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are You Sure?" textAlignment="CENTER" wrappingWidth="296.9056091308594">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="60.0" fitWidth="62.0" layoutX="275.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/scorecherry.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="247.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-1" textAlignment="CENTER" wrappingWidth="39.0">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="254.0" layoutY="264.0" onMouseClicked="#handleSwitchToMainScreen" strokeType="OUTSIDE" strokeWidth="0.0" text="YES" textAlignment="CENTER" wrappingWidth="76.3333740234375">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="nocherrymessage" layoutX="10.0" layoutY="10.0" opacity="0.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="RED" height="245.0" layoutX="115.0" layoutY="99.0" onMouseClicked="#revive" opacity="0.86" stroke="BLACK" strokeType="INSIDE" width="398.0" />
+            <Text fill="WHITE" layoutX="482.0" layoutY="123.0" onMouseClicked="#insufficientcherry" strokeType="OUTSIDE" strokeWidth="0.0" text="X" textAlignment="CENTER" wrappingWidth="32.33331298828125">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="162.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not Enough Cherries" textAlignment="CENTER">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="background" fitHeight="429.0" fitWidth="643.0" layoutX="-19.0" layoutY="-4.0" opacity="0.77" pickOnBounds="true">
+         <image>
+            <Image url="@../../../images/background-modified.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a5a6a8" height="313.0" layoutX="90.0" layoutY="46.0" opacity="0.71" stroke="BLACK" strokeType="INSIDE" width="462.0" />
+      <Text fill="#f61b1b" layoutX="178.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME OVER" textAlignment="CENTER">
+         <font>
+            <Font size="52.0" />
+         </font>
+      </Text>
+      <Text fx:id="displayscore" fill="WHITE" layoutX="288.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="51.0">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="227.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SCORE" textAlignment="CENTER" wrappingWidth="180.0">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="256.0" layoutY="300.0" onMouseClicked="#handleSwitchToMainScreen" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#a5a6a8" height="51.0" layoutX="320.0" layoutY="301.0" onMouseClicked="#SwitchToHomeScreen" opacity="0.47" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+      <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="262.0" layoutY="305.0" onMouseClicked="#handleSwitchToMainScreen" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/restartwobg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="39.0" layoutX="326.0" layoutY="306.0" onMouseClicked="#SwitchToHomeScreen" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/home.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="RED" height="83.0" layoutX="257.0" layoutY="209.0" onMouseClicked="#revive" opacity="0.66" stroke="BLACK" strokeType="INSIDE" width="114.0" />
+      <Text fill="WHITE" layoutX="261.0" layoutY="256.0" onMouseClicked="#revive" strokeType="OUTSIDE" strokeWidth="0.0" text="REVIVE" textAlignment="CENTER" wrappingWidth="105.33332824707031">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

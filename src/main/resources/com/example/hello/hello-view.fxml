@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hello.HelloController">
+   <children>
+      <ImageView fitHeight="412.0" fitWidth="600.0" opacity="0.77" pickOnBounds="true">
+         <image>
+            <Image url="@../../../images/background.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle height="166.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="135.0" />
+      <Rectangle height="166.0" layoutX="255.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="84.0" />
+      <Rectangle height="166.0" layoutX="411.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="39.0" />
+      <Rectangle height="166.0" layoutX="526.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#abb0b5" height="61.0" layoutX="233.0" layoutY="14.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" width="135.0" />
+      <Text layoutX="286.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font size="56.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="player1" fitHeight="120.0" fitWidth="84.0" layoutX="68.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/stickherowobg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="37.0" fitWidth="53.0" layoutX="6.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/pausewobg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="561.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/cherry%20wobg.png" />
+         </image>
+      </ImageView>
+      <Text fill="#0b0b0b" layoutX="560.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="397.0" layoutX="205.0" layoutY="8.0" onMousePressed="#growStick" onMouseReleased="#lowerStick" onSwipeDown="#lowerStick" onTouchPressed="#growStick" onTouchReleased="#lowerStick" stroke="TRANSPARENT" strokeType="INSIDE" width="393.0" />
+      <Rectangle fx:id="stick" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="19.0" layoutX="125.0" layoutY="220.0" stroke="TRANSPARENT" strokeType="INSIDE" width="10.0" />
+   </children>
+</AnchorPane>
