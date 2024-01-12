@@ -10,8 +10,7 @@
 - Game can be puased, resumed, and restarted.
 
 ## Screenshots
-![stickherodemo](https://github.com/AKIHSNAV/StickHero/assets/119172207/8ec49e14-f7be-4065-ab07-28dc7289d74d)
-
+![finaldemo](https://github.com/AKIHSNAV/StickHero/assets/119172207/b25ed090-f783-4120-a215-a054c35c2e73)
 
 ## Object-Oriented Programming Concepts in the Code:
 
